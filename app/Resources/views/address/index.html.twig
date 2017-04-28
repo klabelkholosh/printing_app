@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">Addresses list</h1>
+    <a href="{{ path('address_new') }}" class = "btn btn-primary">Create a new address</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Contact</th>
+                <th>Detail</th>
+                <th>Type</th>
+                <th>Addressnumber</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for address in addresses %}
+            <tr>
+                <td><a href="{{ path('address_show', { 'addressnumber': address.addressnumber }) }}" >{{ address.contact }}</a></td>
+                <td>{{ address.detail }}</td>
+                <td>{{ address.type }}</td>
+                <td>{{ address.addressnumber }}</td>
+                <td>
+
+                            <a href="{{ path('address_show', { 'addressnumber': address.addressnumber }) }}" class = "btn btn-success">show</a>
+                       
+                            <a href="{{ path('address_edit', { 'addressnumber': address.addressnumber }) }}" class = "btn btn-primary">edit</a>
+                 
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+           
+
+{% endblock %}

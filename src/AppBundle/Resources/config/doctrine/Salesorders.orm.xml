@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Salesorders" table="salesorders">
+    <indexes>
+      <index name="IDX_9953A0C4758D7794" columns="customercode"/>
+    </indexes>
+    <id name="sonumber" type="integer" column="sonumber">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="salesorders_sonumber_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="date" type="date" column="date" nullable="true"/>
+    <field name="requireddate" type="date" column="requireddate" nullable="true"/>
+    <many-to-one field="customercode" target-entity="Customer" fetch="LAZY">
+      <join-columns>
+        <join-column name="customercode" referenced-column-name="customercode"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,62 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Address
+ *
+ * @ORM\Table(name="address")
+ * @ORM\Entity
+ */
+class Address
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contact", type="string", length=60, nullable=true)
+     */
+    private $contact;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detail", type="string", nullable=true)
+     */
+    private $detail;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=1, nullable=true)
+     */
+    private $type;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="addressnumber", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="address_addressnumber_seq", allocationSize=1, initialValue=1)
+     */
+    private $addressnumber;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Supplier", mappedBy="addressnumber")
+     */
+    private $suppliercode;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->suppliercode = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

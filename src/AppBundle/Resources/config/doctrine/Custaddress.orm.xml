@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Custaddress" table="custaddress">
+    <indexes>
+      <index name="custaddress_pkey" columns="customercode,addressnumber"/>
+      <index name="IDX_C3C7DF8C758D7794" columns="customercode"/>
+    </indexes>
+    <id name="addressnumber" association-key="true"/>
+    <one-to-one field="addressnumber" target-entity="Address" fetch="LAZY">
+      <join-columns>
+        <join-column name="addressnumber" referenced-column-name="addressnumber"/>
+      </join-columns>
+    </one-to-one>
+    <many-to-one field="customercode" target-entity="Customer" fetch="LAZY">
+      <join-columns>
+        <join-column name="customercode" referenced-column-name="customercode"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

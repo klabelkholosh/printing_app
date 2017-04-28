@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Purchaseorder" table="purchaseorder">
+    <indexes>
+      <index name="IDX_D8BF2BE0B58E5397" columns="suppliercode"/>
+    </indexes>
+    <id name="ponumber" type="integer" column="ponumber">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="purchaseorder_ponumber_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="daterequired" type="date" column="daterequired" nullable="true"/>
+    <many-to-one field="suppliercode" target-entity="Supplier" fetch="LAZY">
+      <join-columns>
+        <join-column name="suppliercode" referenced-column-name="suppliercode"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="materialcode" target-entity="Material" inversed-by="ponumber" fetch="LAZY">
+      <join-table name="polines">
+        <join-columns>
+          <join-column name="ponumber" referenced-column-name="ponumber"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="materialcode" referenced-column-name="materialcode"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

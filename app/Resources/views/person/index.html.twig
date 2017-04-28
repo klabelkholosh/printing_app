@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">People list</h1>
+  <a href="{{ path('person_new') }}" class = "btn btn-primary">Create a new person</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="row">Personcode</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Fingerprint</th>
+                
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for person in people %}
+            <tr>
+                <td>{{ person.personcode }}</td>
+                <td><a href="{{ path('person_show', { 'personcode': person.personcode }) }}">{{ person.name }}</a></td>
+                <td>{{ person.email }}</td>
+                <td>{{ person.phone }}</td>
+                <td>{{ person.fingerprint }}</td>
+                
+                <td>
+                  
+                            <a href="{{ path('person_show', { 'personcode': person.personcode }) }}" class = "btn btn-success">show</a>
+                       
+                            <a href="{{ path('person_edit', { 'personcode': person.personcode }) }}" class = "btn btn-primary">edit</a>
+                  
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+            
+     
+{% endblock %}

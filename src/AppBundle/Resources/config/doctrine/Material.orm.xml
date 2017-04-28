@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Material" table="material">
+    <indexes>
+      <index name="IDX_7CBE7595385CD15D" columns="matgroup"/>
+    </indexes>
+    <id name="materialcode" type="string" column="materialcode" length="40">
+      
+      
+    </id>
+    <field name="description" type="string" column="description" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="type" type="string" column="type" length="1" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="stockunit" type="string" column="stockunit" length="10" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="priceunit" type="string" column="priceunit" length="10" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="minimumstock" type="decimal" column="minimumstock" precision="10" scale="0" nullable="true"/>
+    <field name="status" type="string" column="status" length="1" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <many-to-one field="matgroup" target-entity="Matgroup" fetch="LAZY">
+      <join-columns>
+        <join-column name="matgroup" referenced-column-name="groupcode"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="ponumber" target-entity="Purchaseorder" mapped-by="materialcode" fetch="LAZY"/>
+  </entity>
+</doctrine-mapping>

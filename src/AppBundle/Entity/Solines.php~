@@ -1,0 +1,59 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Solines
+ *
+ * @ORM\Table(name="solines", indexes={@ORM\Index(name="soline_pkey", columns={"sonumber", "product"}), @ORM\Index(name="IDX_306DD3CC1D51CBE1", columns={"sonumber"})})
+ * @ORM\Entity
+ */
+class Solines
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="quantity", type="decimal", precision=10, scale=0, nullable=true)
+     */
+    private $quantity;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="priceunit", type="decimal", precision=10, scale=0, nullable=true)
+     */
+    private $priceunit;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="price", type="decimal", precision=10, scale=0, nullable=true)
+     */
+    private $price;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="product", type="string", length=40)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $product;
+
+    /**
+     * @var \AppBundle\Entity\Salesorders
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Salesorders")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="sonumber", referencedColumnName="sonumber")
+     * })
+     */
+    private $sonumber;
+
+
+}
+

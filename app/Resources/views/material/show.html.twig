@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+  <a href="{{ path('material_index') }}" class = "btn btn-default">Back to the list</a>
+    <h1 class="page-header">Material</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th scope="row">Description</th>
+                <td>{{ material.description }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ material.type }}</td>
+            </tr>
+            <tr>
+                <th>Stockunit</th>
+                <td>{{ material.stockunit }}</td>
+            </tr>
+            <tr>
+                <th>Priceunit</th>
+                <td>{{ material.priceunit }}</td>
+            </tr>
+            <tr>
+                <th>Minimumstock</th>
+                <td>{{ material.minimumstock }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ material.status }}</td>
+            </tr>
+            <tr>
+                <th>Materialcode</th>
+                <td>{{ material.materialcode }}</td>
+            </tr>
+
+             <tr>
+              
+            </tr>
+             <tr>
+              
+            </tr>
+        </tbody>
+    </table>
+
+         
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete" class = "btn btn-danger"> 
+                <a href="{{ path('material_edit', { 'materialcode': material.materialcode }) }}" class = "btn btn-primary">Edit</a>
+            {{ form_end(delete_form) }}
+
+        
+        
+{% endblock %}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Defaultmaterial" table="defaultmaterial">
+    <indexes>
+      <index name="IDX_FA73C5ADFA73C5AD" columns="defaultmaterial"/>
+      <index name="IDX_FA73C5ADDA517D7D" columns="productcode"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="defaultmaterial_pkey" columns="defmatkey"/>
+    </unique-constraints>
+    <id name="defmatkey" type="integer" column="defmatkey">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="defaultmaterial_defmatkey_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="defaultname" type="string" column="defaultname" length="60" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="defaultvalue" type="decimal" column="defaultvalue" precision="10" scale="0" nullable="true"/>
+    <field name="defaultqty" type="decimal" column="defaultqty" precision="10" scale="0" nullable="true"/>
+    <many-to-one field="defaultmaterial" target-entity="Material" fetch="LAZY">
+      <join-columns>
+        <join-column name="defaultmaterial" referenced-column-name="materialcode"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="productcode" target-entity="Product" fetch="LAZY">
+      <join-columns>
+        <join-column name="productcode" referenced-column-name="productcode"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

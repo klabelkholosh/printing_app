@@ -1,0 +1,75 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Delivery
+ *
+ * @ORM\Table(name="delivery", indexes={@ORM\Index(name="delivery_pkey", columns={"deliverynumber"}), @ORM\Index(name="IDX_3781EC1034DCD176", columns={"person"}), @ORM\Index(name="IDX_3781EC101DF44EB8", columns={"jobnumber"})})
+ * @ORM\Entity
+ */
+class Delivery
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="quantity", type="decimal", precision=10, scale=0, nullable=true)
+     */
+    private $quantity;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="date", nullable=true)
+     */
+    private $date;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="time", type="time", nullable=true)
+     */
+    private $time;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=1, nullable=true)
+     */
+    private $status;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deliverynumber", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="delivery_deliverynumber_seq", allocationSize=1, initialValue=1)
+     */
+    private $deliverynumber;
+
+    /**
+     * @var \AppBundle\Entity\Person
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Person")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="person", referencedColumnName="personcode")
+     * })
+     */
+    private $person;
+
+    /**
+     * @var \AppBundle\Entity\Job
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Job")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="jobnumber", referencedColumnName="jobnumber")
+     * })
+     */
+    private $jobnumber;
+
+
+}
+

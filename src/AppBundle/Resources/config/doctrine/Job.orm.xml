@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Job" table="job">
+    <indexes>
+      <index name="IDX_FBD8E0F81D51CBE1" columns="sonumber"/>
+      <index name="IDX_FBD8E0F8D34A04AD" columns="product"/>
+    </indexes>
+    <id name="jobnumber" type="integer" column="jobnumber">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="job_jobnumber_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="daterequired" type="date" column="daterequired" nullable="true"/>
+    <field name="quantity" type="decimal" column="quantity" precision="10" scale="0" nullable="true"/>
+    <field name="status" type="string" column="status" length="1" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <many-to-one field="sonumber" target-entity="Salesorders" fetch="LAZY">
+      <join-columns>
+        <join-column name="sonumber" referenced-column-name="sonumber"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="product" target-entity="Product" fetch="LAZY">
+      <join-columns>
+        <join-column name="product" referenced-column-name="productcode"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Delivery" table="delivery">
+    <indexes>
+      <index name="delivery_pkey" columns="deliverynumber"/>
+      <index name="IDX_3781EC1034DCD176" columns="person"/>
+      <index name="IDX_3781EC101DF44EB8" columns="jobnumber"/>
+    </indexes>
+    <id name="deliverynumber" type="integer" column="deliverynumber">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="delivery_deliverynumber_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="quantity" type="decimal" column="quantity" precision="10" scale="0" nullable="true"/>
+    <field name="date" type="date" column="date" nullable="true"/>
+    <field name="time" type="time" column="time" nullable="true"/>
+    <field name="status" type="string" column="status" length="1" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <many-to-one field="person" target-entity="Person" fetch="LAZY">
+      <join-columns>
+        <join-column name="person" referenced-column-name="personcode"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="jobnumber" target-entity="Job" fetch="LAZY">
+      <join-columns>
+        <join-column name="jobnumber" referenced-column-name="jobnumber"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

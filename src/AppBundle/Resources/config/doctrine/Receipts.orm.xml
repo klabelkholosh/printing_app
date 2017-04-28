@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Receipts" table="receipts">
+    <indexes>
+      <index name="receipt_pkey" columns="receiptnumber"/>
+      <index name="IDX_1DEBE3A28C443594" columns="materialcode"/>
+      <index name="IDX_1DEBE3A234DCD176" columns="person"/>
+      <index name="IDX_1DEBE3A293DECC02" columns="ponumber"/>
+    </indexes>
+    <id name="receiptnumber" type="integer" column="receiptnumber">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="receipts_receiptnumber_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="quantity" type="decimal" column="quantity" precision="10" scale="0" nullable="true"/>
+    <field name="date" type="date" column="date" nullable="true"/>
+    <field name="time" type="time" column="time" nullable="true"/>
+    <many-to-one field="materialcode" target-entity="Material" fetch="LAZY">
+      <join-columns>
+        <join-column name="materialcode" referenced-column-name="materialcode"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="person" target-entity="Person" fetch="LAZY">
+      <join-columns>
+        <join-column name="person" referenced-column-name="personcode"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="ponumber" target-entity="Purchaseorder" fetch="LAZY">
+      <join-columns>
+        <join-column name="ponumber" referenced-column-name="ponumber"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

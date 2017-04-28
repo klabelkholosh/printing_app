@@ -1,0 +1,66 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Purchaseorder
+ *
+ * @ORM\Table(name="purchaseorder", indexes={@ORM\Index(name="IDX_D8BF2BE0B58E5397", columns={"suppliercode"})})
+ * @ORM\Entity
+ */
+class Purchaseorder
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="daterequired", type="date", nullable=true)
+     */
+    private $daterequired;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ponumber", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="purchaseorder_ponumber_seq", allocationSize=1, initialValue=1)
+     */
+    private $ponumber;
+
+    /**
+     * @var \AppBundle\Entity\Supplier
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Supplier")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="suppliercode", referencedColumnName="suppliercode")
+     * })
+     */
+    private $suppliercode;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Material", inversedBy="ponumber")
+     * @ORM\JoinTable(name="polines",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="ponumber", referencedColumnName="ponumber")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="materialcode", referencedColumnName="materialcode")
+     *   }
+     * )
+     */
+    private $materialcode;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->materialcode = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

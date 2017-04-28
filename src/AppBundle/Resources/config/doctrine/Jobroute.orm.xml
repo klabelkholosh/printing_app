@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Jobroute" table="jobroute">
+    <indexes>
+      <index name="jobroute_pkey" columns="jobnumber,sequence"/>
+      <index name="IDX_D82D262383517357" columns="machinecode"/>
+      <index name="IDX_D82D26231DF44EB8" columns="jobnumber"/>
+    </indexes>
+    <id name="sequence" type="integer" column="sequence"/>
+    <id name="jobnumber" association-key="true"/>
+    <field name="minutes" type="integer" column="minutes" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="instruction" type="string" column="instruction" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <one-to-one field="jobnumber" target-entity="Job" fetch="LAZY">
+      <join-columns>
+        <join-column name="jobnumber" referenced-column-name="jobnumber"/>
+      </join-columns>
+    </one-to-one>
+    <many-to-one field="machinecode" target-entity="Machine" fetch="LAZY">
+      <join-columns>
+        <join-column name="machinecode" referenced-column-name="machinecode"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

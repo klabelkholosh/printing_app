@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Defaultroute" table="defaultroute">
+    <indexes>
+      <index name="defaultroute_pkey" columns="defroutekey"/>
+      <index name="IDX_1A106B64B673354" columns="defaultmachine"/>
+      <index name="IDX_1A106B64DA517D7D" columns="productcode"/>
+    </indexes>
+    <id name="defroutekey" type="integer" column="defroutekey">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="defaultroute_defroutekey_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="defaultname" type="string" column="defaultname" length="60" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="defaultvalue" type="decimal" column="defaultvalue" precision="10" scale="0" nullable="true"/>
+    <field name="defaultsequence" type="integer" column="defaultsequence" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="defaultminutes" type="integer" column="defaultminutes" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="defaultmachine" target-entity="Machine" fetch="LAZY">
+      <join-columns>
+        <join-column name="defaultmachine" referenced-column-name="machinecode"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="productcode" target-entity="Product" fetch="LAZY">
+      <join-columns>
+        <join-column name="productcode" referenced-column-name="productcode"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

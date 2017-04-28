@@ -1,0 +1,51 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Product
+ *
+ * @ORM\Table(name="product", indexes={@ORM\Index(name="IDX_D34A04AD385CD15D", columns={"matgroup"})})
+ * @ORM\Entity
+ */
+class Product
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="priceunit", type="string", length=20, nullable=true)
+     */
+    private $priceunit;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="productcode", type="string", length=40)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="product_productcode_seq", allocationSize=1, initialValue=1)
+     */
+    private $productcode;
+
+    /**
+     * @var \AppBundle\Entity\Matgroup
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Matgroup")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="matgroup", referencedColumnName="groupcode")
+     * })
+     */
+    private $matgroup;
+
+
+}
+

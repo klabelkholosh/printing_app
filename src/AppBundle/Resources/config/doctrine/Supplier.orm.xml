@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Supplier" table="supplier">
+    <id name="suppliercode" type="string" column="suppliercode" length="10">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="supplier_suppliercode_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="suppliername" type="string" column="suppliername" length="60" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <many-to-many field="addressnumber" target-entity="Address" inversed-by="suppliercode" fetch="LAZY">
+      <join-table name="supplieraddress">
+        <join-columns>
+          <join-column name="suppliercode" referenced-column-name="suppliercode"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="addressnumber" referenced-column-name="addressnumber"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

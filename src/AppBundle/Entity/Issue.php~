@@ -1,0 +1,78 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Issue
+ *
+ * @ORM\Table(name="issue", indexes={@ORM\Index(name="issue_pkey", columns={"issuenumber"}), @ORM\Index(name="IDX_12AD233E1DF44EB8", columns={"jobnumber"}), @ORM\Index(name="IDX_12AD233E8C443594", columns={"materialcode"}), @ORM\Index(name="IDX_12AD233EB933EE79", columns={"personcode"})})
+ * @ORM\Entity
+ */
+class Issue
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="quantity", type="decimal", precision=10, scale=0, nullable=true)
+     */
+    private $quantity;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="date", nullable=true)
+     */
+    private $date;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="time", type="time", nullable=true)
+     */
+    private $time;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="issuenumber", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="issue_issuenumber_seq", allocationSize=1, initialValue=1)
+     */
+    private $issuenumber;
+
+    /**
+     * @var \AppBundle\Entity\Job
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Job")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="jobnumber", referencedColumnName="jobnumber")
+     * })
+     */
+    private $jobnumber;
+
+    /**
+     * @var \AppBundle\Entity\Material
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Material")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="materialcode", referencedColumnName="materialcode")
+     * })
+     */
+    private $materialcode;
+
+    /**
+     * @var \AppBundle\Entity\Person
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Person")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="personcode", referencedColumnName="personcode")
+     * })
+     */
+    private $personcode;
+
+
+}
+

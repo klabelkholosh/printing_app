@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Product" table="product">
+    <indexes>
+      <index name="IDX_D34A04AD385CD15D" columns="matgroup"/>
+    </indexes>
+    <id name="productcode" type="string" column="productcode" length="40">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="product_productcode_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="description" type="string" column="description" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="priceunit" type="string" column="priceunit" length="20" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <many-to-one field="matgroup" target-entity="Matgroup" fetch="LAZY">
+      <join-columns>
+        <join-column name="matgroup" referenced-column-name="groupcode"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

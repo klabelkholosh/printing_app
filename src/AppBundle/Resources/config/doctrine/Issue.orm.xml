@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Issue" table="issue">
+    <indexes>
+      <index name="issue_pkey" columns="issuenumber"/>
+      <index name="IDX_12AD233E1DF44EB8" columns="jobnumber"/>
+      <index name="IDX_12AD233E8C443594" columns="materialcode"/>
+      <index name="IDX_12AD233EB933EE79" columns="personcode"/>
+    </indexes>
+    <id name="issuenumber" type="integer" column="issuenumber">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="issue_issuenumber_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="quantity" type="decimal" column="quantity" precision="10" scale="0" nullable="true"/>
+    <field name="date" type="date" column="date" nullable="true"/>
+    <field name="time" type="time" column="time" nullable="true"/>
+    <many-to-one field="jobnumber" target-entity="Job" fetch="LAZY">
+      <join-columns>
+        <join-column name="jobnumber" referenced-column-name="jobnumber"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="materialcode" target-entity="Material" fetch="LAZY">
+      <join-columns>
+        <join-column name="materialcode" referenced-column-name="materialcode"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="personcode" target-entity="Person" fetch="LAZY">
+      <join-columns>
+        <join-column name="personcode" referenced-column-name="personcode"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

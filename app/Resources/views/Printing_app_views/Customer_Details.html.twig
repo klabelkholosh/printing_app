@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<a href="/Customer_Page/Supplier_Page" class="btn btn-default">Back to list</a>
+<h3 class="page-header">{{customers.name}} Details</h3>
+<lu class="list-group">
+<li class="list-group-item">{{customers.customercode}}</li>
+<li class="list-group-item">{{customers.name}}</li>
+<li class="list-group-item">{{customers.status}}</li>
+</lu>     
+{% endblock %}

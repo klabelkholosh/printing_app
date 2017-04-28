@@ -1,0 +1,93 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Material
+ *
+ * @ORM\Table(name="material", indexes={@ORM\Index(name="IDX_7CBE7595385CD15D", columns={"matgroup"})})
+ * @ORM\Entity
+ */
+class Material
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=1, nullable=true)
+     */
+    private $type;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="stockunit", type="string", length=10, nullable=true)
+     */
+    private $stockunit;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="priceunit", type="string", length=10, nullable=true)
+     */
+    private $priceunit;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="minimumstock", type="decimal", precision=10, scale=0, nullable=true)
+     */
+    private $minimumstock;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=1, nullable=true)
+     */
+    private $status;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="materialcode", type="string", length=40)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="material_materialcode_seq", allocationSize=1, initialValue=1)
+     */
+    private $materialcode;
+
+    /**
+     * @var \AppBundle\Entity\Matgroup
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Matgroup")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="matgroup", referencedColumnName="groupcode")
+     * })
+     */
+    private $matgroup;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Purchaseorder", mappedBy="materialcode")
+     */
+    private $ponumber;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ponumber = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

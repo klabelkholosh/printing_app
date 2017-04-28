@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+ <a href="{{ path('salesorders_index') }}" class="btn btn-default">Back to the list</a>
+    <h1 class="page-haeder">Salesorder</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Date</th>
+                <td>{% if salesorder.date %}{{ salesorder.date|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Requireddate</th>
+                <td>{% if salesorder.requireddate %}{{ salesorder.requireddate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Sonumber</th>
+                <td>{{ salesorder.sonumber }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+           
+        
+            <a href="{{ path('salesorders_edit', { 'sonumber': salesorder.sonumber }) }}" class="btn btn-primary">Edit</a>
+       
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete" class="btn btn-danger">
+            {{ form_end(delete_form) }}
+    
+{% endblock %}

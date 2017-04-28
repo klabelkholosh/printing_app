@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">Materials list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="row">Description</th>
+                <th>Type</th>
+                <th>Stockunit</th>
+                <th>Priceunit</th>
+                <th>Minimumstock</th>
+                <th>Status</th>
+                <th>Materialcode</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for material in materials %}
+            <tr>
+                <td><a href="{{ path('material_show', { 'materialcode': material.materialcode }) }}">{{ material.description }}</a></td>
+                <td>{{ material.type }}</td>
+                <td>{{ material.stockunit }}</td>
+                <td>{{ material.priceunit }}</td>
+                <td>{{ material.minimumstock }}</td>
+                <td>{{ material.status }}</td>
+                <td>{{ material.materialcode }}</td>
+                <td>
+                            <a href="{{ path('material_show', { 'materialcode': material.materialcode }) }}" class = "btn btn-success">Show</a>
+                            <a href="{{ path('material_edit', { 'materialcode': material.materialcode }) }}" class = "btn btn-primary">Edit</a>
+                     
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+            <a href="{{ path('material_new') }}" class = "btn btn-primary">Create a new material</a>
+    
+{% endblock %}

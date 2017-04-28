@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Solines" table="solines">
+    <indexes>
+      <index name="soline_pkey" columns="sonumber,product"/>
+      <index name="IDX_306DD3CC1D51CBE1" columns="sonumber"/>
+    </indexes>
+    <id name="product" type="string" column="product" length="40"/>
+    <id name="sonumber" association-key="true"/>
+    <field name="quantity" type="decimal" column="quantity" precision="10" scale="0" nullable="true"/>
+    <field name="priceunit" type="decimal" column="priceunit" precision="10" scale="0" nullable="true"/>
+    <field name="price" type="decimal" column="price" precision="10" scale="0" nullable="true"/>
+    <one-to-one field="sonumber" target-entity="Salesorders" fetch="LAZY">
+      <join-columns>
+        <join-column name="sonumber" referenced-column-name="sonumber"/>
+      </join-columns>
+    </one-to-one>
+  </entity>
+</doctrine-mapping>

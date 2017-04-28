@@ -1,0 +1,62 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Jobroute
+ *
+ * @ORM\Table(name="jobroute", indexes={@ORM\Index(name="jobroute_pkey", columns={"jobnumber", "sequence"}), @ORM\Index(name="IDX_D82D262383517357", columns={"machinecode"}), @ORM\Index(name="IDX_D82D26231DF44EB8", columns={"jobnumber"})})
+ * @ORM\Entity
+ */
+class Jobroute
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="minutes", type="integer", nullable=true)
+     */
+    private $minutes;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="instruction", type="string", nullable=true)
+     */
+    private $instruction;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sequence", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $sequence;
+
+    /**
+     * @var \AppBundle\Entity\Job
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Job")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="jobnumber", referencedColumnName="jobnumber")
+     * })
+     */
+    private $jobnumber;
+
+    /**
+     * @var \AppBundle\Entity\Machine
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Machine")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="machinecode", referencedColumnName="machinecode")
+     * })
+     */
+    private $machinecode;
+
+
+}
+

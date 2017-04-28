@@ -1,0 +1,51 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Salesorders
+ *
+ * @ORM\Table(name="salesorders", indexes={@ORM\Index(name="IDX_9953A0C4758D7794", columns={"customercode"})})
+ * @ORM\Entity
+ */
+class Salesorders
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="date", nullable=true)
+     */
+    private $date;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="requireddate", type="date", nullable=true)
+     */
+    private $requireddate;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sonumber", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="salesorders_sonumber_seq", allocationSize=1, initialValue=1)
+     */
+    private $sonumber;
+
+    /**
+     * @var \AppBundle\Entity\Customer
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Customer")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="customercode", referencedColumnName="customercode")
+     * })
+     */
+    private $customercode;
+
+
+}
+

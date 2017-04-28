@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">Salesorders list</h1>
+    <a href="{{ path('salesorders_new') }}" class="btn btn-primary">Create a new salesorder</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Requireddate</th>
+                <th>Sonumber</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for salesorder in salesorders %}
+            <tr>
+                <td><a href="{{ path('salesorders_show', { 'sonumber': salesorder.sonumber }) }}">{{ salesorder.date }}</a></td>
+                <td>{% if salesorder.requireddate %}{{ salesorder.requireddate|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ salesorder.sonumber }}</td>
+                <td>
+                    
+                        
+                        <a href="{{ path('salesorders_show', { 'sonumber': salesorder.sonumber }) }}" class="btn btn-success">show</a>
+                        <a href="{{ path('salesorders_edit', { 'sonumber': salesorder.sonumber }) }}" class="btn btn-primary">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+          
+   
+{% endblock %}

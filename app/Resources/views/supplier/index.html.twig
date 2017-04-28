@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">Suppliers list</h1>
+    <a href="{{ path('supplier_new') }}" class="btn btn-primary">Create a new supplier</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Suppliername</th>
+                <th>Suppliercode</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for supplier in suppliers %}
+            <tr>
+                <td><a href="{{ path('supplier_show', { 'suppliercode': supplier.suppliercode }) }}">{{ supplier.suppliername }}</a></td>
+                <td>{{ supplier.suppliercode }}</td>
+                <td>
+                  
+                    <a href="{{ path('supplier_show', { 'suppliercode': supplier.suppliercode }) }}" class="btn btn-success">show</a>
+                    
+                    <a href="{{ path('supplier_edit', { 'suppliercode': supplier.suppliercode }) }}" class="btn btn-primary">edit</a>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+            
+  
+{% endblock %}

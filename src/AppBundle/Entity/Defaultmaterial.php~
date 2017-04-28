@@ -1,0 +1,68 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Defaultmaterial
+ *
+ * @ORM\Table(name="defaultmaterial", uniqueConstraints={@ORM\UniqueConstraint(name="defaultmaterial_pkey", columns={"defmatkey"})}, indexes={@ORM\Index(name="IDX_FA73C5ADFA73C5AD", columns={"defaultmaterial"}), @ORM\Index(name="IDX_FA73C5ADDA517D7D", columns={"productcode"})})
+ * @ORM\Entity
+ */
+class Defaultmaterial
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="defaultname", type="string", length=60, nullable=true)
+     */
+    private $defaultname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="defaultvalue", type="decimal", precision=10, scale=0, nullable=true)
+     */
+    private $defaultvalue;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="defaultqty", type="decimal", precision=10, scale=0, nullable=true)
+     */
+    private $defaultqty;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="defmatkey", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="defaultmaterial_defmatkey_seq", allocationSize=1, initialValue=1)
+     */
+    private $defmatkey;
+
+    /**
+     * @var \AppBundle\Entity\Material
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Material")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="defaultmaterial", referencedColumnName="materialcode")
+     * })
+     */
+    private $defaultmaterial;
+
+    /**
+     * @var \AppBundle\Entity\Product
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Product")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="productcode", referencedColumnName="productcode")
+     * })
+     */
+    private $productcode;
+
+
+}
+

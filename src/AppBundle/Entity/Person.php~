@@ -1,0 +1,55 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Person
+ *
+ * @ORM\Table(name="person")
+ * @ORM\Entity
+ */
+class Person
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=60, nullable=true)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=60, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string", length=60, nullable=true)
+     */
+    private $phone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fingerprint", type="blob", nullable=true)
+     */
+    private $fingerprint;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="personcode", type="string", length=20)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="person_personcode_seq", allocationSize=1, initialValue=1)
+     */
+    private $personcode;
+
+
+}
+
