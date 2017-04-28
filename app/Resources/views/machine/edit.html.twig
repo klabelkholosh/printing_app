@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+ <a href="{{ path('machine_index') }}" class="btn btn-default">Back to the list</a>
+    <h1 class="page-header">Machine edit</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Edit" class="btn btn-primary"/>
+    {{ form_end(edit_form) }}
+
+    
+           
+   
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete" class="btn btn-danger">
+            {{ form_end(delete_form) }}
+      
+{% endblock %}
