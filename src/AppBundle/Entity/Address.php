@@ -1,5 +1,5 @@
 <?php
-//bentesting a comment
+
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
