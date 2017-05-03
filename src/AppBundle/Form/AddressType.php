@@ -20,16 +20,12 @@ class AddressType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+          ->add('addressnumber', TextType::class, array('attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px', 'placeholder'=>'Enter address number')))
           ->add('contact', TextType::class, array('attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px', 'placeholder'=>'Enter contact number')))
           ->add('detail', TextareaType::class, array('attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px', 'placeholder'=>'Enter address details')))
-          ->add('type', ChoiceType::class, array('choices'=>array('Delivery'=>'D', 'Invoice'=>'I', 'Statement'=>'S'), 'attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
-          ->add('suppliercode', 
-                EntityType::class, 
-                array(
-                'class' => 'AppBundle:Customer',
-                'choice_label'=>'customercode',
-                'multiple'=>true)
-                );
+          ->add('email', TextType::class, array('attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px', 'placeholder'=>'Enter email address')))
+
+          ->add('type', ChoiceType::class, array('choices'=>array('Delivery'=>'D', 'Invoice'=>'I', 'Statement'=>'S'), 'attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px')));
     }
     
     /**

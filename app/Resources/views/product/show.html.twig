@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('product_index') }}" class="btn btn-default">Back to the list</a>
+    <h1 class="page-header">Product</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Description</th>
+                <td>{{ product.description }}</td>
+            </tr>
+            <tr>
+                <th>Priceunit</th>
+                <td>{{ product.priceunit }}</td>
+            </tr>
+            <tr>
+                <th>Productcode</th>
+                <td>{{ product.productcode }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+            
+        
+            <a href="{{ path('product_edit', { 'productcode': product.productcode }) }}" class="btn btn-primary">Edit</a>
+        
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete" class="btn btn-danger">
+            {{ form_end(delete_form) }}
+      
+{% endblock %}

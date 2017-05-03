@@ -31,8 +31,6 @@ class Machine
      *
      * @ORM\Column(name="machinecode", type="string", length=20)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="machine_machinecode_seq", allocationSize=1, initialValue=1)
      */
     private $machinecode;
 
@@ -84,6 +82,20 @@ class Machine
     public function getHourlyrate()
     {
         return $this->hourlyrate;
+    }
+
+    /**
+     * Set machinecode
+     *
+     * @param string $machinecode
+     *
+     * @return Machine
+     */
+    public function setMachinecode($machinecode)
+    {
+        $this->machinecode = $machinecode;
+
+        return $this;
     }
 
     /**
