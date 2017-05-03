@@ -66,10 +66,8 @@ class Material
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Matgroup")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="matgroup", referencedColumnName="groupcode")
-     * })
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Matgroup", inversedBy="groupcode")
+
      */
     private $matgroup;
 
@@ -263,13 +261,13 @@ class Material
     }
 
     /**
-     * Add matgroup
+     * Set matgroup
      *
      * @param \AppBundle\Entity\Matgroup $matgroup
      *
      * @return Material
      */
-    public function addMatgroup(\AppBundle\Entity\Matgroup $matgroup)
+    public function setMatgroup(\AppBundle\Entity\Matgroup $matgroup)
     {
         $this->matgroup[] = $matgroup;
 

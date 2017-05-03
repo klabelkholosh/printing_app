@@ -24,8 +24,7 @@ class Supplier
      *
      * @ORM\Column(name="suppliercode", type="string", length=10)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="supplier_suppliercode_seq", allocationSize=1, initialValue=1)
+
      */
     private $suppliercode;
 
@@ -75,6 +74,20 @@ class Supplier
     public function getSuppliername()
     {
         return $this->suppliername;
+    }
+
+    /**
+     * Set suppliercode
+     *
+     * @param string $suppliercode
+     *
+     * @return Supplier
+     */
+    public function setSuppliercode($suppliercode)
+    {
+        $this->suppliercode = $suppliercode;
+
+        return $this;
     }
 
     /**

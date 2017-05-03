@@ -34,12 +34,17 @@ class Address
     private $type;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=60, nullable=true)
+     */
+    private $email;
+
+    /**
      * @var integer 
      *
      * @ORM\Column(name="addressnumber", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @ORM\SequenceGenerator(sequenceName="addressnumber", allocationSize=1, initialValue=1)
      */
     public $addressnumber;
 
@@ -131,6 +136,44 @@ class Address
         return $this->type;
     }
 
+   /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return Address
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set addressnumber
+     *
+     * @param string $addressnumber
+     *
+     * @return Address
+     */
+    public function setAddressnumber($addressnumber)
+    {
+        $this->addressnumber = $addressnumber;
+
+        return $this;
+    }
+
     /**
      * Get addressnumber
      *
@@ -148,7 +191,7 @@ class Address
      *
      * @return Address
      */
-    public function addSuppliercode(\AppBundle\Entity\Supplier $suppliercode)
+    public function addSuppliercode(\AppBundle\Entity\Customer $suppliercode)
     {
         $this->suppliercode[] = $suppliercode;
 
@@ -160,7 +203,7 @@ class Address
      *
      * @param \AppBundle\Entity\Supplier $suppliercode
      */
-    public function removeSuppliercode(\AppBundle\Entity\Supplier $suppliercode)
+    public function removeSuppliercode(\AppBundle\Entity\Customer $suppliercode)
     {
         $this->suppliercode->removeElement($suppliercode);
     }
