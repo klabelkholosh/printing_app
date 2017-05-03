@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Psr\Log\LoggerInterface;
 
 /**
  * Material
@@ -12,6 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Material
 {
+    private $logger;
+
     /**
      * @var string
      *
@@ -85,7 +88,7 @@ class Material
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(LoggerInterface $logger)
     {
         $this->ponumber = new \Doctrine\Common\Collections\ArrayCollection();
         $this->matgroup = new \Doctrine\Common\Collections\ArrayCollection();
@@ -271,6 +274,7 @@ class Material
      */
     public function addMatgroup(\AppBundle\Entity\Matgroup $matgroup)
     {
+        $this->logger->info($matgroup);
         $this->matgroup[] = $matgroup;
 
         return $this;
