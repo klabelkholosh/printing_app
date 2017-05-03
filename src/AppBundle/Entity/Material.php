@@ -5,6 +5,10 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Psr\Log\LoggerInterface;
 
+/*
+test
+*/
+
 /**
  * Material
  *
