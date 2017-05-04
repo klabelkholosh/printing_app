@@ -73,8 +73,10 @@ class Material
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Matgroup", inversedBy="groupcode")
-
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Matgroup", inversedBy="matgroup")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="matgroup", referencedColumnName="groupcode")
+     * })
      */
     private $matgroup;
 
@@ -90,13 +92,16 @@ class Material
     /**
      * Constructor
      */
-    public function __construct(LoggerInterface $logger)
+    public function __construct()
     {
         $this->ponumber = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->matgroup = new \Doctrine\Common\Collections\ArrayCollection();
+       
     }
 
-   
+    public function __toString()
+    {
+        return $this->matgroup;
+    }
 
 
     /**
@@ -274,13 +279,15 @@ class Material
      *
      * @return Material
      */
-    public function setMatgroup(\AppBundle\Entity\Matgroup $matgroup)
+    public function setMatgroup(\AppBundle\Entity\Matgroup $matgroup = null)
     {
-        $this->logger->info($matgroup);
-        $this->matgroup[] = $matgroup;
+        
+
+       $this->matgroup = $matgroup;
 
         return $this;
     }
+
 
     /**
      * Get matgroup
