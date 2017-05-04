@@ -3,9 +3,11 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * Defaultroute
+ *@ApiResource
  *
  * @ORM\Table(name="defaultroute", indexes={@ORM\Index(name="defaultroute_pkey", columns={"defroutekey"}), @ORM\Index(name="IDX_1A106B64B673354", columns={"defaultmachine"}), @ORM\Index(name="IDX_1A106B64DA517D7D", columns={"productcode"})})
  * @ORM\Entity

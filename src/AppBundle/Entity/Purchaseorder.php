@@ -2,10 +2,12 @@
 
 namespace AppBundle\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Purchaseorder
+ * @ApiResource
  *
  * @ORM\Table(name="purchaseorder", indexes={@ORM\Index(name="IDX_D8BF2BE0B58E5397", columns={"suppliercode"})})
  * @ORM\Entity

@@ -4,8 +4,11 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use ApiPlatform\Core\Annotation\ApiResource;
+
 /**
  * Custaddress
+ *@ApiResource
  *
  * @ORM\Table(name="custaddress", indexes={@ORM\Index(name="custaddress_pkey", columns={"customercode", "addressnumber"}), @ORM\Index(name="IDX_C3C7DF8C758D7794", columns={"customercode"})})
  * @ORM\Entity

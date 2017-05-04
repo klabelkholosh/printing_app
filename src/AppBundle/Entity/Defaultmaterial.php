@@ -3,9 +3,11 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * Defaultmaterial
+ *@ApiResource
  *
  * @ORM\Table(name="defaultmaterial", uniqueConstraints={@ORM\UniqueConstraint(name="defaultmaterial_pkey", columns={"defmatkey"})}, indexes={@ORM\Index(name="IDX_FA73C5ADFA73C5AD", columns={"defaultmaterial"}), @ORM\Index(name="IDX_FA73C5ADDA517D7D", columns={"productcode"})})
  * @ORM\Entity
