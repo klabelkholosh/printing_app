@@ -28,7 +28,8 @@ class MaterialType extends AbstractType
             ->add('matgroup', EntityType::class, array(
                 'class' => 'AppBundle:Matgroup',
                 'choice_label'=>'groupcode',
-                'multiple'=>true))
+                'multiple'=>false, 
+                'attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
             ->add('ponumber');
     }
     

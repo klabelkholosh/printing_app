@@ -97,13 +97,13 @@ class Material
     public function __construct()
     {
         $this->ponumber = new \Doctrine\Common\Collections\ArrayCollection();
-       
+        $this->matgroup = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    public function __toString()
+    /*public function __toString()
     {
         return $this->matgroup;
-    }
+    }*/
 
 
     /**
