@@ -2,11 +2,13 @@
 
 namespace AppBundle\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Address
  *
+ * @ApiResource
  * @ORM\Table(name="address")
  * @ORM\Entity
  */
