@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 111.112.113.21
+    database_port: 5432
+    database_name: printmis
+    database_user: andy
+    database_password: john316
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: 72a5ce08fb6cc02f9f2ebd600637a3af5c29c3da
