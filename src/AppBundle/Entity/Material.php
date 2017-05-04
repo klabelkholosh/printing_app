@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Psr\Log\LoggerInterface;
 
@@ -12,6 +13,7 @@ test
 /**
  * Material
  *
+ * @ApiResource
  * @ORM\Table(name="material", indexes={@ORM\Index(name="IDX_7CBE7595385CD15D", columns={"matgroup"})})
  * @ORM\Entity
  */
