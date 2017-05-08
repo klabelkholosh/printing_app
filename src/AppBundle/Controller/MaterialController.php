@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Material;
+use AppBundle\Entity\Matgroup;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -40,11 +41,17 @@ class MaterialController extends Controller
     public function newAction(Request $request)
     {
         $material = new Material();
+
+
         $form = $this->createForm('AppBundle\Form\MaterialType', $material);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $material = $em->find('Material', $matgroup);
+            $matgr = new Matgroup();
+            $material->setMatgroup($matgr);            
+
             $em->persist($material);
             $em->flush();
 

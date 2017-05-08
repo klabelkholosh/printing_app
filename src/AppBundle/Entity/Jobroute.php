@@ -3,9 +3,11 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * Jobroute
+ * @ApiResource
  *
  * @ORM\Table(name="jobroute", indexes={@ORM\Index(name="jobroute_pkey", columns={"jobnumber", "sequence"}), @ORM\Index(name="IDX_D82D262383517357", columns={"machinecode"}), @ORM\Index(name="IDX_D82D26231DF44EB8", columns={"jobnumber"})})
  * @ORM\Entity

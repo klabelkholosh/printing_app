@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<a href="{{ path('matgroup_index') }}" class="btn btn-default">Back to the list</a>
+    <h1 class="page-header">Matgroup</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Description</th>
+                <td>{{ matgroup.description }}</td>
+            </tr>
+            <tr>
+                <th>Groupcode</th>
+                <td>{{ matgroup.groupcode }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+            
+     
+            <a href="{{ path('matgroup_edit', { 'groupcode': matgroup.groupcode }) }}" class="btn btn-primary">Edit</a>
+ 
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete" class="btn btn-danger">
+            {{ form_end(delete_form) }}
+
+{% endblock %}

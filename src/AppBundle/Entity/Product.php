@@ -3,9 +3,11 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * Product
+ * @ApiResource
  *
  * @ORM\Table(name="product", indexes={@ORM\Index(name="IDX_D34A04AD385CD15D", columns={"matgroup"})})
  * @ORM\Entity

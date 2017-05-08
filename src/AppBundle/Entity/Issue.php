@@ -3,9 +3,11 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * Issue
+ * @ApiResource
  *
  * @ORM\Table(name="issue", indexes={@ORM\Index(name="issue_pkey", columns={"issuenumber"}), @ORM\Index(name="IDX_12AD233E1DF44EB8", columns={"jobnumber"}), @ORM\Index(name="IDX_12AD233E8C443594", columns={"materialcode"}), @ORM\Index(name="IDX_12AD233EB933EE79", columns={"personcode"})})
  * @ORM\Entity

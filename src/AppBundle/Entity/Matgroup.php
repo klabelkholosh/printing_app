@@ -3,9 +3,11 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * Matgroup
+ * @ApiResource
  *
  * @ORM\Table(name="matgroup")
  * @ORM\Entity
@@ -24,8 +26,6 @@ class Matgroup
      *
      * @ORM\Column(name="groupcode", type="string", length=10)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="matgroup_groupcode_seq", allocationSize=1, initialValue=1)
      */
     private $groupcode;
 
@@ -53,6 +53,20 @@ class Matgroup
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set groupcode
+     *
+     * @param string $groupcode
+     *
+     * @return Matgroup
+     */
+    public function setGroupcode($groupcode)
+    {
+        $this->groupcode = $groupcode;
+
+        return $this;
     }
 
     /**

@@ -3,10 +3,12 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * Delivery
  *
+ * @ApiResource
  * @ORM\Table(name="delivery", indexes={@ORM\Index(name="delivery_pkey", columns={"deliverynumber"}), @ORM\Index(name="IDX_3781EC1034DCD176", columns={"person"}), @ORM\Index(name="IDX_3781EC101DF44EB8", columns={"jobnumber"})})
  * @ORM\Entity
  */

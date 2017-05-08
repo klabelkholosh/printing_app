@@ -3,9 +3,11 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * Person
+ * @ApiResource
  *
  * @ORM\Table(name="person")
  * @ORM\Entity

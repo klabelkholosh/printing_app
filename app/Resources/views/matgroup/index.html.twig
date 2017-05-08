@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">Matgroups list</h1>
+  <a href="{{ path('matgroup_new') }}" class="btn btn-primary">Create a new matgroup</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Groupcode</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for matgroup in matgroups %}
+            <tr>
+                <td><a href="{{ path('matgroup_show', { 'groupcode': matgroup.groupcode }) }}">{{ matgroup.description }}</a></td>
+                <td>{{ matgroup.groupcode }}</td>
+                <td>
+                    
+                            <a href="{{ path('matgroup_show', { 'groupcode': matgroup.groupcode }) }}" class="btn btn-success">show</a>
+                        
+                            <a href="{{ path('matgroup_edit', { 'groupcode': matgroup.groupcode }) }}" class="btn btn-primary">edit</a>
+                     
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+            
+     
+{% endblock %}
