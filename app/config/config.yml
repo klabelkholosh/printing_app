@@ -64,7 +64,7 @@ doctrine:
         auto_mapping: true
 
 # API Platform Config
-api_platform:
+api-platform:
 
     # The title of the API.
     title: ''

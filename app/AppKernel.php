@@ -2,6 +2,7 @@
 
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+//use ApiPlatform\Core\Bridge\Symfony\Bundle;
 
 class AppKernel extends Kernel
 {
@@ -15,7 +16,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-	    new ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle(),
+	        //new ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle(),
             new AppBundle\AppBundle(),
         ];
 
