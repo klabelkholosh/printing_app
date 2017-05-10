@@ -84,22 +84,8 @@ class Material
 
 
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Purchaseorder", mappedBy="materialcode")
-     */
-    private $ponumber;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->ponumber = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->matgroup = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
+  
     /*public function __toString()
     {
         return $this->matgroup;
@@ -301,37 +287,5 @@ class Material
         return $this->matgroup;
     }
 
-    /**
-     * Add ponumber
-     *
-     * @param \AppBundle\Entity\Purchaseorder $ponumber
-     *
-     * @return Material
-     */
-    public function addPonumber(\AppBundle\Entity\Purchaseorder $ponumber)
-    {
-        $this->ponumber[] = $ponumber;
 
-        return $this;
-    }
-
-    /**
-     * Remove ponumber
-     *
-     * @param \AppBundle\Entity\Purchaseorder $ponumber
-     */
-    public function removePonumber(\AppBundle\Entity\Purchaseorder $ponumber)
-    {
-        $this->ponumber->removeElement($ponumber);
-    }
-
-    /**
-     * Get ponumber
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPonumber()
-    {
-        return $this->ponumber;
-    }
 }

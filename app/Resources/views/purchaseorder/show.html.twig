@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('purchaseorder_index') }}" class="btn btn-default">Back to the list</a>
+    <h1 class="page-header">Purchaseorder</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Daterequired</th>
+                <td>{% if purchaseorder.daterequired %}{{ purchaseorder.daterequired|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Ponumber</th>
+                <td>{{ purchaseorder.ponumber }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+   
+            
+   
+            <a href="{{ path('purchaseorder_edit', { 'ponumber': purchaseorder.ponumber }) }}" class="btn btn-primary">Edit</a>
+       
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete" class="btn btn-danger">
+            {{ form_end(delete_form) }}
+    
+{% endblock %}

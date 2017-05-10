@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">Purchaseorders list</h1>
+    <a href="{{ path('purchaseorder_new') }}" class="btn btn-primary">Create a new purchaseorder</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Daterequired</th>
+                <th>Ponumber</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for purchaseorder in purchaseorders %}
+            <tr>
+                <td><a href="{{ path('purchaseorder_show', { 'ponumber': purchaseorder.ponumber }) }}">{{ purchaseorder.daterequired|date("m/d/y") }}</a></td>
+                <td>{{ purchaseorder.ponumber }}</td>
+                <td>
+                   
+                            <a href="{{ path('purchaseorder_show', { 'ponumber': purchaseorder.ponumber }) }}" class="btn btn-success">show</a>
+                       
+                            <a href="{{ path('purchaseorder_edit', { 'ponumber': purchaseorder.ponumber }) }}" class="btn btn-primary">edit</a>
+                       
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+           
+    
+{% endblock %}

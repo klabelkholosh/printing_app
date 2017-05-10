@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('customer_index') }}" class="btn btn-default">Back to the list</a>
+    <h1 class="page-header">Customer creation</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" class="btn btn-primary"/>
+    {{ form_end(form) }}
+
+{% endblock %}

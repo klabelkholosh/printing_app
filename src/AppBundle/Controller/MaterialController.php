@@ -50,6 +50,8 @@ class MaterialController extends Controller
             $em = $this->getDoctrine()->getManager();
             $material = $em->find('Material', $matgroup);
             $matgr = new Matgroup();
+            $matgr = $form['matgroup']->getData();
+            
             $material->setMatgroup($matgr);            
 
             $em->persist($material);

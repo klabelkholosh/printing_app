@@ -39,6 +39,6 @@
         <join-column name="matgroup" referenced-column-name="groupcode"/>
       </join-columns>
     </many-to-one>
-    <many-to-many field="ponumber" target-entity="Purchaseorder" mapped-by="materialcode" fetch="LAZY"/>
+    
   </entity>
 </doctrine-mapping>

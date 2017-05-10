@@ -14,5 +14,15 @@
         <option name="fixed">1</option>
       </options>
     </field>
+     <field name="loginemail" type="string" column="loginemail" length="60" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+     <field name="password" type="string" column="password" length="60" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
   </entity>
 </doctrine-mapping>

@@ -29,6 +29,19 @@ class Customer
      */
     private $status;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="loginemail", type="string", length=60, nullable=true)
+     */
+    private $loginemail;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=20, nullable=true)
+     */
+    private $password;
 
     /**
      * @var string
@@ -93,6 +106,54 @@ class Customer
     {
         return $this->status;
     }
+
+    /**
+     * Set loginemail
+     *
+     * @param string $loginemail
+     *
+     * @return Customer
+     */
+    public function setLoginemail($loginemail)
+    {
+        $this->loginemail = $loginemail;
+
+        return $this;
+    }
+
+    /**
+     * Get loginemail
+     *
+     * @return string
+     */
+    public function getLoginemail()
+    {
+        return $this->loginemail;
+    } 
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return Customer
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }   
  
     /**
      * Set customercode
@@ -117,4 +178,8 @@ class Customer
     {
         return $this->customercode;
     }
+
+
 }
+
+
