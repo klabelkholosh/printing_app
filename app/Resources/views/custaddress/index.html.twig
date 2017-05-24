@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">Custaddresses list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Customer Name</th>
+                <th>Address Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for custaddress in custaddresses %}
+            <tr>
+                <td>{{ custaddress.customercode.name }}</td>
+                <td>{{ custaddress.addressnumber.detail }}</td>
+                <td>
+                <a href="{{ path('custaddress_show', { 'addressnumber': custaddress.addressnumber.addressnumber }) }}" class = "btn btn-success">show</a>
+                    <a href="{{ path('custaddress_edit', { 'addressnumber': custaddress.addressnumber.addressnumber }) }}" class = "btn btn-primary">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+     <a href="{{ path('custaddress_index') }}" class="btn btn-default">Back to the list</a>
+    <h1 class="page-header">Custaddress</h1>
+   
+     
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Customer Name</th>
+                <td>{{ custaddress.customercode.customercode }}</td>
+            </tr>
+            
+            <tr>
+                <th>Address Number</th>
+                <td>{{ custaddress.addressnumber.detail }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+   
+            
+      
+            <a href="{{ path('custaddress_edit', { 'addressnumber': custaddress.addressnumber.addressnumber }) }}" class="btn btn-primary">Edit</a>
+       
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete" class="btn btn-danger">
+            {{ form_end(delete_form) }}
+      
+{% endblock %}
