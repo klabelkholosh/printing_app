@@ -3,16 +3,18 @@
 {% block body %}
     <h1 class="page-header">Customers list</h1>
    <a href="{{ path('customer_new') }}" class="btn btn-primary">Create a new customer</a>
-    <table class="table">
+
+   <form action="{{ path('customer_index')}}" method="get">
+   <table class="table">
         <thead>
-        <tr>
+   <tr>
                 <th>
                 <div class="row">
                     <div class="col-lg-10">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="customercode" placeholder="Customer Code">
+                            <input type="text" class="form-control" name="customercode_filter" placeholder="Customer Code">
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                             </span>
                         </div><!-- /input-group -->
                     </div><!-- /.col-lg-6 -->
@@ -23,9 +25,9 @@
                 <div class="row">
                   <div class="col-lg-10">
                      <div class="input-group">
-                        <input type="text" class="form-control" name="name" placeholder="Customer name">
+                        <input type="text" class="form-control" name="filter" placeholder="Customer name">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                         </span>
                       </div><!-- /input-group -->
                    </div><!-- /.col-lg-6 -->
@@ -37,10 +39,12 @@
 
              
             </tr>
+          
+        
             <tr>
-                <th>Customercode</th>
-                <th>Name</th>
-                <th>Status</th>
+                <th>{{ knp_pagination_sortable(customers,'Customer Code','c.customercode')}}</th>
+                <th>{{ knp_pagination_sortable(customers,'Name','c.name')}}</th>
+                <th>{{ knp_pagination_sortable(customers,'Status','c.status')}}</th>
                 <th>Email Address</th>
                 <th>Actions</th>
             </tr>
@@ -53,18 +57,24 @@
                 <td>{{ customer.status }}</td>
                 <td>{{ customer.loginemail }}</td>
                 <td>
+                    <a href="{{ path('customer_edit', { 'customercode': customer.customercode }) }}" class="btn btn-primary">edit</a>
+
+                    <a href="{{ path('custaddress_new', { 'customercode': customer.customercode }) }}" class="btn btn-primary">Add Address</a>
                    
-                            <a href="{{ path('customer_show', { 'customercode': customer.customercode }) }}" class="btn btn-success">show</a>
-                        
-                            <a href="{{ path('customer_edit', { 'customercode': customer.customercode }) }}" class="btn btn-primary">edit</a>
+                   <a href="{{ path('customer_show', { 'customercode': customer.customercode }) }}" class="btn btn-danger">Delete</a>
+
+                    
+                
                 
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-
-            
+    </form>
+  <div class="navigation text-center">
+    {{ knp_pagination_render(customers) }}
+</div>
+      
 
 {% endblock %}

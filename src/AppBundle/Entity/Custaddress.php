@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
@@ -34,6 +35,7 @@ class Custaddress
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="customercode", referencedColumnName="customercode")
      * })
+     * 
      */
     private $customercode;
 
@@ -41,6 +43,12 @@ class Custaddress
     {
        $this->customercode = new ArrayCollection();
     }
+
+   public function __toString()
+    {
+        return $this->addressnumber;
+    }
+
 
     /**
      * Set addressnumber
@@ -75,6 +83,7 @@ class Custaddress
      */
     public function setCustomercode(\AppBundle\Entity\Customer $customercode = null)
     {
+        dump($customercode);
         $this->customercode = $customercode;
 
         return $this;

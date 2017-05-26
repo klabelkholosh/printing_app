@@ -65,7 +65,7 @@ class Address
         $this->suppliercode = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-
+    
     /**
      * Set contact
      *
@@ -162,6 +162,11 @@ class Address
         return $this->email;
     }
 
+    public function __toString()
+    {
+        return $this->detail;
+    }
+
     /**
      * Set addressnumber
      *
@@ -219,4 +224,5 @@ class Address
     {
         return $this->suppliercode;
     }
+    
 }

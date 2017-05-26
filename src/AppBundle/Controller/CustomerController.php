@@ -20,16 +20,39 @@ class CustomerController extends Controller
      * @Route("/", name="customer_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        //$dql = "SELECT c FROM AppBundle:Customer c";
+        //$query = $em->createQuery($dql);
+        //$customers = $em->getRepository('AppBundle:Customer')->findAll();
+        $queryBuilder = $em->getRepository('AppBundle:Customer')->createQueryBuilder('c');
+        if ($request->query->getAlnum('filter')) {
+            $queryBuilder
+                ->where('c.name LIKE :name')
+                ->setParameter('name', '%' .$request->query->getAlnum('filter').'%');
+        }
+        elseif ($request->query->getAlnum('customercode_filter')) {
+                    $queryBuilder
+                        ->where('c.customercode LIKE :customercode')
+                        ->setParameter('customercode', '%' .$request->query->getAlnum('customercode_filter').'%');
+            }
+        $query =$queryBuilder->getQuery();
 
-        $customers = $em->getRepository('AppBundle:Customer')->findAll();
+        /**
+        * @var $paginator /Knp/Component/Pager/Paginator
+        */
+        $paginator = $this->get('knp_paginator');
+        $result = $paginator->paginate($query,
+                             $request->query->getInt('page', 1),
+                             $request->query->getInt('limit', 5)   );
 
         return $this->render('customer/index.html.twig', array(
-            'customers' => $customers,
+            'customers' => $result,
         ));
     }
+
+  
 
     /**
      * Creates a new customer entity.
@@ -48,7 +71,7 @@ class CustomerController extends Controller
             $em->persist($customer);
             $em->flush();
 
-            return $this->redirectToRoute('customer_show', array('customercode' => $customer->getCustomercode()));
+            return $this->redirectToRoute('custaddress_new', array('customercode' => $customer->getCustomercode()));
         }
 
         return $this->render('customer/new.html.twig', array(
@@ -66,7 +89,7 @@ class CustomerController extends Controller
     public function showAction(Customer $customer)
     {
         $deleteForm = $this->createDeleteForm($customer);
-
+        dump($customer);
         return $this->render('customer/show.html.twig', array(
             'customer' => $customer,
             'delete_form' => $deleteForm->createView(),

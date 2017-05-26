@@ -2,32 +2,67 @@
 
 {% block body %}
     <h1 class="page-header">Materials list</h1>
-
+    <a href="{{ path('material_new') }}" class = "btn btn-primary">Create a new material</a>
+    <form action="{{ path('material_index')}}" method="get">
     <table class="table">
         <thead>
+        <tr>
+                <th>
+                <div class="row">
+                    <div class="col-lg-10">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="code_filter" placeholder="Material Code">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                            </span>
+                        </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+                </th>
+
+                <th>
+                <div class="row">
+                  <div class="col-lg-10">
+                     <div class="input-group">
+                        <input type="text" class="form-control" name="type_filter" placeholder="Material type">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                      </div><!-- /input-group -->
+                   </div><!-- /.col-lg-6 -->
+                 </div><!-- /.row -->
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+
+             
+            </tr>
             <tr>
+                 <th>{{ knp_pagination_sortable(materials,'Material Code','m.materialcode')}}</th>
                 <th scope="row">Description</th>
                 <th>Type</th>
                 <th>Stockunit</th>
                 <th>Priceunit</th>
                 <th>Minimumstock</th>
                 <th>Status</th>
-                <th>Materialcode</th>
+               
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for material in materials %}
             <tr>
+                <td>{{ material.materialcode }}</td>
                 <td><a href="{{ path('material_show', { 'materialcode': material.materialcode }) }}">{{ material.description }}</a></td>
                 <td>{{ material.type }}</td>
                 <td>{{ material.stockunit }}</td>
                 <td>{{ material.priceunit }}</td>
                 <td>{{ material.minimumstock }}</td>
                 <td>{{ material.status }}</td>
-                <td>{{ material.materialcode }}</td>
+                
                 <td>
-                            <a href="{{ path('material_show', { 'materialcode': material.materialcode }) }}" class = "btn btn-success">Show</a>
+                    <a href="{{ path('material_show', { 'materialcode': material.materialcode }) }}" class = "btn btn-danger">Delete</a>
                             <a href="{{ path('material_edit', { 'materialcode': material.materialcode }) }}" class = "btn btn-primary">Edit</a>
                      
                 </td>
@@ -35,8 +70,13 @@
         {% endfor %}
         </tbody>
     </table>
+    </form>
 
    
-            <a href="{{ path('material_new') }}" class = "btn btn-primary">Create a new material</a>
+            
+              <div class="navigation text-center">
+    {{ knp_pagination_render(materials) }}
+</div>
+      
     
 {% endblock %}

@@ -66,6 +66,11 @@ class Customer
        $this->customercode = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->customercode;
+    }
+
     public function setName($name)
     {
         $this->name = $name;

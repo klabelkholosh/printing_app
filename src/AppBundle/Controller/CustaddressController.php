@@ -45,7 +45,7 @@ class CustaddressController extends Controller
         $custaddress = new Custaddress();
         $form = $this->createForm('AppBundle\Form\CustaddressType', $custaddress);
         $form->handleRequest($request);
-        dump($custaddress);
+        
         echo $customercode;
         if ($form->isSubmitted() && $form->isValid()) {
             

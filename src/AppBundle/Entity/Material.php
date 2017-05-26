@@ -73,7 +73,7 @@ class Material
     private $materialcode;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var AppBundle\Entity\Matgroup
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Matgroup", inversedBy="matgroup")
      * @ORM\JoinColumns({

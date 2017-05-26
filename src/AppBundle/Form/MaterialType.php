@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\EntityRepository;
 
 class MaterialType extends AbstractType
 {
@@ -28,10 +29,13 @@ class MaterialType extends AbstractType
             ->add('matgroup', EntityType::class, array(
                 'class' => 'AppBundle:Matgroup',
                 'choice_label'=>'description',
+                'query_builder' => function (EntityRepository $matgr){
+                return $matgr->createQueryBuilder('m')
+                    ->orderBy('m.groupcode', 'ASC');},
                 'multiple'=>false, 
                 'attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px')));
            
-            dump('matgroup');
+            dump($builder);
     }
     
     /**

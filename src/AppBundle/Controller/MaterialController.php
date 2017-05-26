@@ -21,14 +21,31 @@ class MaterialController extends Controller
      * @Route("/", name="material_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $materials = $em->getRepository('AppBundle:Material')->findAll();
+        //$materials = $em->getRepository('AppBundle:Material')->findAll();
+        $queryBuilder = $em->getRepository('AppBundle:Material')->createQueryBuilder('m');
+        if ($request->query->getAlnum('type_filter')) {
+            $queryBuilder
+                ->where('m.type LIKE :type')
+                ->setParameter('type', '%' .$request->query->getAlnum('filter').'%');
+        }
+        elseif ($request->query->getAlnum('code_filter')) {
+                    $queryBuilder
+                        ->where('m.materialcode LIKE :materialcode')
+                        ->setParameter('materialcode', '%' .$request->query->getAlnum('code_filter').'%');
+            }
+        $query =$queryBuilder->getQuery();
+
+        $paginator = $this->get('knp_paginator');
+        $result = $paginator->paginate($query,
+                             $request->query->getInt('page', 1),
+                             $request->query->getInt('limit', 5)   );
 
         return $this->render('material/index.html.twig', array(
-            'materials' => $materials,
+            'materials' => $result,
         ));
     }
 
@@ -48,11 +65,7 @@ class MaterialController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $material = $em->find('Material', $matgroup);
-            $matgr = new Matgroup();
-            $matgr = $form['matgroup']->getData();
-            
-            $material->setMatgroup($matgr);            
+            $material = $em->find('Material', $matgroup);            
 
             $em->persist($material);
             $em->flush();
