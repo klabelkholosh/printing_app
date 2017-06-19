@@ -1,0 +1,81 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Polines
+ *
+ * @ORM\Table(name="polines", indexes={@ORM\Index(name="poline_pkey", columns={"ponumber", "materialcode"}), @ORM\Index(name="IDX_185C9518C443594", columns={"materialcode"})})
+ * @ORM\Entity
+ */
+class Polines
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="quantity", type="decimal", precision=10, scale=0, nullable=true)
+     */
+    private $quantity;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="priceunit", type="string", length=10, nullable=true)
+     */
+    private $priceunit;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="price", type="decimal", precision=10, scale=0, nullable=true)
+     */
+    private $price;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="stkunitconv", type="decimal", precision=10, scale=0, nullable=true)
+     */
+    private $stkunitconv;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=1, nullable=true)
+     */
+    private $status;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="person", type="string", length=20, nullable=true)
+     */
+    private $person;
+
+    /**
+     * @var \AppBundle\Entity\Purchaseorder
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Purchaseorder")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ponumber", referencedColumnName="ponumber")
+     * })
+     */
+    private $ponumber;
+
+    /**
+     * @var \AppBundle\Entity\Material
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Material")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="materialcode", referencedColumnName="materialcode")
+     * })
+     */
+    private $materialcode;
+
+
+}
+

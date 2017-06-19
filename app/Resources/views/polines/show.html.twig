@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<a href="{{ path('polines_index') }}" class="btn btn-default">Back to the list</a>
+    <h1>Poline</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Quantity</th>
+                <td>{{ poline.quantity }}</td>
+            </tr>
+            <tr>
+                <th>Priceunit</th>
+                <td>{{ poline.priceunit }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ poline.price }}</td>
+            </tr>
+            <tr>
+                <th>Stkunitconv</th>
+                <td>{{ poline.stkunitconv }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ poline.status }}</td>
+            </tr>
+            <tr>
+                <th>Person</th>
+                <td>{{ poline.person }}</td>
+            </tr>
+        </tbody>
+    </table>
+            <a href="{{ path('polines_edit', { 'ponumber': poline.ponumber }) }}" class="btn btn-primary" style="margin-bottom:15px">Edit</a>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete" class="btn btn-danger">
+            {{ form_end(delete_form) }}
+{% endblock %}
