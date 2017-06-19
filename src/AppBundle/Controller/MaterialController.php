@@ -65,7 +65,7 @@ class MaterialController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $material = $em->find('Material', $matgroup);            
+            /*$material = $em->find('Material', $matgroup);            */
 
             $em->persist($material);
             $em->flush();

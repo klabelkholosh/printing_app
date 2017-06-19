@@ -3,9 +3,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Purchaseorder;
+use AppBundle\Entity\Supplier;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Purchaseorder controller.
@@ -28,6 +31,50 @@ class PurchaseorderController extends Controller
 
         return $this->render('purchaseorder/index.html.twig', array(
             'purchaseorders' => $purchaseorders,
+        ));
+    }
+
+    /** Lists all supplier entities.
+     *
+     * @Route("/newOrder/", name="purchase_newOrder")
+     * @Method("GET")
+     */
+    public function newOrderAction(Request $request)
+    {
+        $purchaseorder = new Purchaseorder();
+        $supplier = new Supplier();
+        $em = $this->getDoctrine()->getManager();
+        //$suppliers = $em->getRepository('AppBundle:Supplier')->findAll();
+        $dql = $em->getRepository('AppBundle:Supplier')->createQueryBuilder('s');
+        if ($request->query->getAlnum('supplier_name')) {
+
+            $dql->where('s.suppliername LIKE :name')
+                ->setParameter('name', '%'. $request->query->get('supplier_name') .'%');
+
+        }elseif ($request->query->getAlnum('supplier_id')) {
+
+            $supplier_id = $request->query->get('supplier_id');
+            $date = $request->query->get('date');
+            $ponumber = $request->query->get('ponumber');
+            foreach ($supplier_id as $id) {
+                $supplier->suppliercode = $id;
+                $ponumber = $purchaseorder->getPonumber();
+                var_dump($ponumber);
+                $purchaseorder->setDaterequired(\DateTime::createFromFormat('d-m-Y', $date));
+                $purchaseorder->setSuppliercode($supplier);
+                $em->merge($purchaseorder);
+                $em->flush();
+            } 
+            return $this->redirectToRoute('purchaseorder_index', array('ponumber' => $purchaseorder->getPonumber()));
+        }
+        
+        $query = $dql->getQuery();
+        $paginator = $this->get('knp_paginator');
+        $suppliers = $paginator->paginate($query,
+                             $request->query->getInt('page', 1),
+                             $request->query->getInt('limit', 5)   );
+        return $this->render('purchaseorder/newOrder.html.twig', array(
+            'suppliers' => $suppliers,
         ));
     }
 
@@ -66,10 +113,13 @@ class PurchaseorderController extends Controller
     public function showAction(Purchaseorder $purchaseorder)
     {
         $deleteForm = $this->createDeleteForm($purchaseorder);
-
+        $ponumber = $purchaseorder->getPonumber();
+        $em = $this->getDoctrine()->getManager();
+        $polines = $em->getRepository('AppBundle:Polines')->findBy(array('ponumber' => $ponumber));
         return $this->render('purchaseorder/show.html.twig', array(
             'purchaseorder' => $purchaseorder,
             'delete_form' => $deleteForm->createView(),
+            'polines' => $polines,
         ));
     }
 

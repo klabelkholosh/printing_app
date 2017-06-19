@@ -18,10 +18,12 @@ class CustaddressType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
+        $builder->add('addressnumber', TextType::class )
+                //->add('customercode', TextType::class);
             ->add('addressnumber', EntityType::class, array(
                             'class'=>'AppBundle:Address',
-                            'choice_label' =>'detail','multiple'=>false, 
+                            'choice_label' =>'addressnumber',
+                            'multiple'=>true,                             
                             'attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px')));
           /* ->add('customercode', EntityType::class, array(
                             'class'=>'AppBundle:Customer',

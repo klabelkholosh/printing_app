@@ -3,20 +3,61 @@
 {% block body %}
     <a href="{{ path('purchaseorder_index') }}" class="btn btn-default">Back to the list</a>
     <h1 class="page-header">Purchaseorder</h1>
-
+    <a href="{{ path('polines_new') }}" class="btn btn-primary" style="margin-bottom:15px">Create a new poline</a>
     <table class="table">
         <tbody>
             <tr>
-                <th>Daterequired</th>
-                <td>{% if purchaseorder.daterequired %}{{ purchaseorder.daterequired|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Ponumber</th>
+                <th>Perchase Order Number</th>
                 <td>{{ purchaseorder.ponumber }}</td>
             </tr>
+            <tr>
+                <th>Supplier Code</th>
+                <td>{{ purchaseorder.suppliercode }}</td>
+            </tr>
+            <tr>
+                <th>Supplier Name</th>
+                <td>{{ purchaseorder.suppliercode.suppliername }}</td>
+            </tr>
+            <tr>
+                <th>Date Required</th>
+                <td>{% if purchaseorder.daterequired %}{{ purchaseorder.daterequired|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+
         </tbody>
     </table>
+    
+<table class="table">
+        <thead>
+            <tr>
+                <th>Quantity</th>
+                <th>Priceunit</th>
+                <th>Price</th>
+                <th>Stkunitconv</th>
+                <th>Status</th>
+                <th>Person</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for poline in polines %}
+            <tr>
+                <td><a href="{{ path('polines_show', { 'ponumber': poline.ponumber|length }) }}">{{ poline.quantity }}</a></td>
+                <td>{{ poline.priceunit }}</td>
+                <td>{{ poline.price }}</td>
+                <td>{{ poline.stkunitconv }}</td>
+                <td>{{ poline.status }}</td>
+                <td>{{ poline.person }}</td>
+                <td>
 
+                            <a href="{{ path('polines_show', { 'ponumber': poline.ponumber }) }}" class="btn btn-danger">Delete</a>
+
+                            <a href="{{ path('polines_edit', { 'ponumber': poline.ponumber }) }}" class="btn btn-primary">edit</a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
    
             
    

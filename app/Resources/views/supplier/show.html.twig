@@ -7,13 +7,43 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Suppliername</th>
-                <td>{{ supplier.suppliername }}</td>
-            </tr>
-            <tr>
                 <th>Suppliercode</th>
                 <td>{{ supplier.suppliercode }}</td>
             </tr>
+            <tr>
+                <th>Suppliername</th>
+                <td>{{ supplier.suppliername }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>PO Number</th>
+                <th>Supplier code</th>
+                <th>Supplier Name</th>
+                <th>Date Required</th>
+                
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for purchaseorder in purchaseorders %}
+            <tr>
+                <td>{{ purchaseorder.ponumber }}</td>
+                <td>{{ purchaseorder.suppliercode }}</td>
+                <td>{{ purchaseorder.suppliercode.suppliername }}</td>
+                <td><a href="{{ path('purchaseorder_show', { 'ponumber': purchaseorder.ponumber }) }}">{{ purchaseorder.daterequired|date("m/d/y") }}</a></td>
+                
+                <td>
+                   
+                            <a href="{{ path('purchaseorder_show', { 'ponumber': purchaseorder.ponumber }) }}" class="btn btn-success">show</a>
+                       
+                            <a href="{{ path('purchaseorder_edit', { 'ponumber': purchaseorder.ponumber }) }}" class="btn btn-primary">edit</a>
+                       
+                </td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
 

@@ -3,9 +3,13 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Address;
+use AppBundle\Entity\Customer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
 
 /**
  * Address controller.
@@ -40,6 +44,10 @@ class AddressController extends Controller
     public function newAction(Request $request)
     {
         $address = new Address();
+        $objC = new Customer();
+        $session = new Session(new PhpBridgeSessionStorage());
+        $code = $session->get('customercode');
+       
         $form = $this->createForm('AppBundle\Form\AddressType', $address);
         $form->handleRequest($request);
 
@@ -48,7 +56,7 @@ class AddressController extends Controller
             $em->persist($address);
             $em->flush();
 
-            return $this->redirectToRoute('address_show', array('addressnumber' => $address->getAddressnumber()));
+            return $this->redirectToRoute('new_address', array('addressnumber' => $address->getAddressnumber(), 'customercode'=>$code));
         }
 
         return $this->render('address/new.html.twig', array(

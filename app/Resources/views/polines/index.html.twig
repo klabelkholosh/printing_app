@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Polines list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Quantity</th>
+                <th>Priceunit</th>
+                <th>Price</th>
+                <th>Stkunitconv</th>
+                <th>Status</th>
+                <th>Person</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for poline in polines %}
+            <tr>
+                <td><a href="{{ path('polines_show', { 'ponumber': poline.ponumber }) }}">{{ poline.quantity }}</a></td>
+                <td>{{ poline.priceunit }}</td>
+                <td>{{ poline.price }}</td>
+                <td>{{ poline.stkunitconv }}</td>
+                <td>{{ poline.status }}</td>
+                <td>{{ poline.person }}</td>
+                <td>
+                            <a href="{{ path('polines_show', { 'ponumber': poline.ponumber }) }}" class="btn btn-success">show</a>
+                            <a href="{{ path('polines_edit', { 'ponumber': poline.ponumber }) }}" class="btn btn-primary">edit</a>
+                   
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('polines_new') }}" >Create a new poline</a>
+        </li>
+    </ul>
+{% endblock %}

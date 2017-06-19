@@ -21,12 +21,12 @@ class Custaddress
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Address")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Address")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="addressnumber", referencedColumnName="addressnumber")
      * })
      */
-    private $addressnumber;
+    public $addressnumber;
 
     /**
      * @var \AppBundle\Entity\Customer
@@ -39,7 +39,7 @@ class Custaddress
      */
     private $customercode;
 
-    public function _cunstruct()
+    public function __construct()
     {
        $this->customercode = new ArrayCollection();
     }
@@ -83,7 +83,7 @@ class Custaddress
      */
     public function setCustomercode(\AppBundle\Entity\Customer $customercode = null)
     {
-        dump($customercode);
+        
         $this->customercode = $customercode;
 
         return $this;

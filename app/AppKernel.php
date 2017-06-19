@@ -19,6 +19,8 @@ class AppKernel extends Kernel
 	        new ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle(),
 
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             
             new AppBundle\AppBundle(),
         ];

@@ -81,6 +81,6 @@ class Matgroup
 
     public function __toString()
     {
-        return $this->matgroup;
+        return $this->groupcode;
     }
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Polines" table="polines">
+    <indexes>
+      <index name="poline_pkey" columns="ponumber,materialcode"/>
+      <index name="IDX_185C9518C443594" columns="materialcode"/>
+    </indexes>
+    <id name="ponumber" association-key="true"/>
+    <field name="quantity" type="decimal" column="quantity" precision="10" scale="0" nullable="true"/>
+    <field name="priceunit" type="string" column="priceunit" length="10" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="price" type="decimal" column="price" precision="10" scale="0" nullable="true"/>
+    <field name="stkunitconv" type="decimal" column="stkunitconv" precision="10" scale="0" nullable="true"/>
+    <field name="status" type="string" column="status" length="1" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="person" type="string" column="person" length="20" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <one-to-one field="ponumber" target-entity="Purchaseorder" fetch="LAZY">
+      <join-columns>
+        <join-column name="ponumber" referenced-column-name="ponumber"/>
+      </join-columns>
+    </one-to-one>
+    <many-to-one field="materialcode" target-entity="Material" fetch="LAZY">
+      <join-columns>
+        <join-column name="materialcode" referenced-column-name="materialcode"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

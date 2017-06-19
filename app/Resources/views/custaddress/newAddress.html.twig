@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<a href="" class="btn btn-default">Back</a>
+    <h1 class="page-header">Custaddresses list</h1>
+   
+   <form  method="get">
+    <table class="table">
+    <thead>
+        <tr>
+                <th>
+                
+                </th>
+                <th>
+                    <input class="btn btn-primary" type="submit" value="Add address" >
+
+                </th>
+                </tr>
+        <thead>
+            <tr>
+                <th>Address</th>
+                <th>Check Add</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                
+                <td>{{ custaddresses.detail }}</td>
+                  <td><input type="checkbox" id="form_role_1" name="checkbox" class="checkbox" value="{{custaddresses.addressnumber}}" /></td>
+             
+            </tr>
+      
+        </tbody>
+ 
+     </table>
+    </form>
+{% endblock %}
