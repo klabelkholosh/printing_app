@@ -47,6 +47,7 @@ class Address
      *
      * @ORM\Column(name="addressnumber", type="integer", nullable=false)
      * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Custaddress")
      */
     public $addressnumber;
 
@@ -63,6 +64,12 @@ class Address
     public function __construct()
     {
         $this->suppliercode = new \Doctrine\Common\Collections\ArrayCollection();
+
+    }
+
+    public function __toString()
+    {
+        return $this->addressnumber. '('.$this->detail.')';
     }
 
     
@@ -162,10 +169,7 @@ class Address
         return $this->email;
     }
 
-    public function __toString()
-    {
-        return $this->detail;
-    }
+   
 
     /**
      * Set addressnumber

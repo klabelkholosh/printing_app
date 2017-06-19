@@ -36,7 +36,7 @@ class Purchaseorder
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Supplier")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="suppliercode", referencedColumnName="suppliercode")
+     *   @ORM\JoinColumn(name="suppliercode", referencedColumnName="suppliercode", nullable=true)
      * })
      */
     private $suppliercode;
@@ -63,7 +63,16 @@ class Purchaseorder
     {
         $this->materialcode = new \Doctrine\Common\Collections\ArrayCollection();
     }
+    /*public function __toString()
+    {
+        return $this->ponumber;
+    }*/
 
+    public function __toString()
+    {
+        return (string) $this->ponumber;
+
+    }
 
     /**
      * Set daterequired
@@ -90,6 +99,21 @@ class Purchaseorder
     }
 
     /**
+     * Set ponumber
+     *
+     * @param \integer $ponumber
+     *
+     * @return Purchaseorder
+     */
+    public function setPonumber($ponumber)
+    {
+        
+        $this->ponumber = $ponumber;
+
+        return $this;
+    }
+
+    /**
      * Get ponumber
      *
      * @return integer
@@ -108,6 +132,7 @@ class Purchaseorder
      */
     public function setSuppliercode(\AppBundle\Entity\Supplier $suppliercode = null)
     {
+
         $this->suppliercode = $suppliercode;
 
         return $this;

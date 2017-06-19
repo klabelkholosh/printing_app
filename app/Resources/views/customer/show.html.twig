@@ -2,7 +2,12 @@
 
 {% block body %}
 <a href="{{ path('customer_index') }}" class="btn btn-default">Back to the list</a>
-<h3 class="page-header">You about to Delete this customer</h3>
+<h3 class="page-header">Customer Details</h3>
+<div>
+<a href="{{ path('select_address', { 'customercode': customer.customercode }) }}" class="btn btn-primary">Add Address</a>
+<a href="{{ path('address_new') }}" }}" class="btn btn-primary">Create Address</a>
+</div>
+<hr>
     <table class="table">
         <tbody>
             <tr>
@@ -22,15 +27,34 @@
                 <td>{{ customer.loginemail }}</td>
             </tr>
         </tbody>
+       
+
+
+        <tbody>
+           <tr>
+            <th>Addresses</th>
+           </tr>
+           <tr>
+                <th>Type</th>
+                <th>Address</th>
+               
+               
+            </tr>
+    
+        {% for custaddress in custaddresses %}
+            <tr>
+                <td>{{ custaddress.addressnumber.type }}</td>
+                <td>{{ custaddress.addressnumber.detail }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
     </table>
 
     <table>
     <tbody>
     <tr>
     <th>
-    <div class="alert alert-danger" role="alert"><strong>Oh snap!</strong>
-      Are you sure you want to delete this customer
-    </div>
+    
     </th>
     </tr>
      <tr>  

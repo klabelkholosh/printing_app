@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /*
 test
@@ -70,12 +71,14 @@ class Material
      * @ORM\Id
      * 
      */
-    private $materialcode;
+    public $materialcode;
 
     /**
      * @var AppBundle\Entity\Matgroup
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Matgroup", inversedBy="matgroup")
+     * @Assert\Count(min="1", max="1")
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Matgroup")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="matgroup", referencedColumnName="groupcode")
      * })
@@ -86,10 +89,10 @@ class Material
 
 
   
-    /*public function __toString()
+    public function __toString()
     {
-        return $this->matgroup;
-    }*/
+        return $this->materialcode;
+    }
 
 
     /**

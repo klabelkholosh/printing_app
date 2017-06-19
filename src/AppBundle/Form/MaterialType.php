@@ -25,17 +25,15 @@ class MaterialType extends AbstractType
             ->add('priceunit', TextType::class, array('attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px', 'placeholder'=>'Enter Price Amount')))
             ->add('minimumstock', TextType::class, array('attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px', 'placeholder'=>'Enter Minimum Stock Unit')))
             ->add('status', ChoiceType::class, array('choices'=>array('Normal'=>'N', 'Consignment'=>'C', 'Low'=>'L', 'Deprecated'=>'D'), 'attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
-
-            ->add('matgroup', EntityType::class, array(
+;
+           /* ->add('matgroup', EntityType::class, array(
                 'class' => 'AppBundle:Matgroup',
                 'choice_label'=>'description',
-                'query_builder' => function (EntityRepository $matgr){
-                return $matgr->createQueryBuilder('m')
-                    ->orderBy('m.groupcode', 'ASC');},
+
                 'multiple'=>false, 
-                'attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px')));
+                'attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px')));*/
            
-            dump($builder);
+           
     }
     
     /**

@@ -18,13 +18,18 @@ class PurchaseorderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('daterequired', DateType::class, ['widget' => 'single_text'])
+        ->add('daterequired', DateType::class, [ 'widget' => 'single_text',
+                    'attr' => ['class' => 'js-datepicker'],
+                    'html5' => false,])
         ->add('suppliercode', EntityType::class, 
             array('class'=>'AppBundle:Supplier',
-                   'choice_label'=>'suppliercode'))
-        ->add('materialcode', EntityType::class, 
+                   'choice_label'=>'suppliername',
+                   'attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px')));
+        /*->add('materialcode', EntityType::class, 
             array('class'=>'AppBundle:Material',
-                'choice_label'=>'materialcode'));
+                'choice_label'=>'materialcode',
+                 'attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px')));*/
+       dump($builder);
     }
     
     /**

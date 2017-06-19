@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<a href="" class="btn btn-default">Back</a>
+    <h1 class="page-header">Custaddresses list</h1>
+   
+   <form  method="get">
+    <table class="table">
+    <thead>
+        <tr>
+                <th>
+                <div class="row">
+                    <div class="col-lg-10">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="address" placeholder="Search address">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                            </span>
+                        </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+                </th>
+                <th>
+                    <input class="btn btn-primary" type="submit" value="Add address" >
+
+                </th>
+                </tr>
+        <thead>
+            <tr>
+                <th>Address</th>
+                
+                <th>Check Add</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+        {% for custaddress in custaddresses %}
+         <tr>
+                
+            <td>{{ custaddress.detail }}</td>
+            <td><input type="checkbox" id="form_role_1" name="checkbox[]" class="checkbox" value="{{custaddress.addressnumber}}" /></td>
+             
+         </tr>
+        {% endfor %}
+        </tbody>
+ 
+     </table>
+    </form>
+    <div class="navigation text-center">     
+    {{ knp_pagination_render(custaddresses) }}
+</div>
+      
+{% endblock %}

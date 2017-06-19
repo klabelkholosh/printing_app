@@ -66,10 +66,15 @@ class SupplierController extends Controller
     public function showAction(Supplier $supplier)
     {
         $deleteForm = $this->createDeleteForm($supplier);
-
+        $suppliercode = $supplier->getSuppliercode();
+        
+        $em = $this->getDoctrine()->getManager();
+        $purchaseorder = $em->getRepository('AppBundle:Purchaseorder')->findBy(array('suppliercode' => $suppliercode));
+        dump($purchaseorder);
         return $this->render('supplier/show.html.twig', array(
             'supplier' => $supplier,
             'delete_form' => $deleteForm->createView(),
+            'purchaseorders'=> $purchaseorder,
         ));
     }
 

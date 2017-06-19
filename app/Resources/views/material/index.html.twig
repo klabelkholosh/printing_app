@@ -62,8 +62,9 @@
                 <td>{{ material.status }}</td>
                 
                 <td>
+                    <a href="{{ path('material_edit', { 'materialcode': material.materialcode }) }}" class = "btn btn-primary">Edit</a>
                     <a href="{{ path('material_show', { 'materialcode': material.materialcode }) }}" class = "btn btn-danger">Delete</a>
-                            <a href="{{ path('material_edit', { 'materialcode': material.materialcode }) }}" class = "btn btn-primary">Edit</a>
+                            
                      
                 </td>
             </tr>

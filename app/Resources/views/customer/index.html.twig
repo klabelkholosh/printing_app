@@ -7,7 +7,7 @@
    <form action="{{ path('customer_index')}}" method="get">
    <table class="table">
         <thead>
-   <tr>
+        <tr>
                 <th>
                 <div class="row">
                     <div class="col-lg-10">
@@ -57,14 +57,10 @@
                 <td>{{ customer.status }}</td>
                 <td>{{ customer.loginemail }}</td>
                 <td>
+                    <a href="{{ path('customer_show', { 'customercode': customer.customercode }) }}" class="btn btn-success">Show</a>
                     <a href="{{ path('customer_edit', { 'customercode': customer.customercode }) }}" class="btn btn-primary">edit</a>
 
-                    <a href="{{ path('custaddress_new', { 'customercode': customer.customercode }) }}" class="btn btn-primary">Add Address</a>
-                   
-                   <a href="{{ path('customer_show', { 'customercode': customer.customercode }) }}" class="btn btn-danger">Delete</a>
 
-                    
-                
                 
                 </td>
             </tr>
@@ -72,7 +68,7 @@
         </tbody>
     </table>
     </form>
-  <div class="navigation text-center">
+  <div class="navigation text-center">     
     {{ knp_pagination_render(customers) }}
 </div>
       

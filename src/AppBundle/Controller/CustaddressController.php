@@ -4,10 +4,17 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Customer;
 use AppBundle\Entity\Custaddress;
+use AppBundle\Entity\Address;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\Paginator;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
+
+
 
 /**
  * Custaddress controller.
@@ -16,6 +23,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  */
 class CustaddressController extends Controller
 {
+
+
     /**
      * Lists all custaddress entities.
      *
@@ -24,14 +33,100 @@ class CustaddressController extends Controller
      */
     public function indexAction()
     {
+        $session = new Session(new PhpBridgeSessionStorage());
         $em = $this->getDoctrine()->getManager();
-
-        $custaddresses = $em->getRepository('AppBundle:Custaddress')->findAll();
-
+        $code = $session->get('customercode');
+        $custaddresses = $em->getRepository('AppBundle:Custaddress')->findBy(array('customercode'=>$code));
         return $this->render('custaddress/index.html.twig', array(
             'custaddresses' => $custaddresses,
         ));
     }
+
+        /**
+     * Lists all custaddress entities.
+     *
+     * @Route("/newAddress/{addressnumber}/", name="new_address")
+     * @Method("GET")
+     */
+    public function newAddressAction($addressnumber,Request $request, Address $objA)
+    {
+        $session = new Session(new PhpBridgeSessionStorage());
+        $em = $this->getDoctrine()->getManager();
+        $code = $session->get('showcode');
+        dump($code);
+        $custaddresses = $em->getRepository('AppBundle:Address')->findOneBy(array('addressnumber'=>$addressnumber));
+        $newAddr = new Custaddress();
+        $objC = new Customer();
+        
+        $objC->customercode = $code;
+        if ($request->query->getAlnum('checkbox'))
+        {
+            $nums = $request->query->get('checkbox');
+            
+            $newAddr->setAddressnumber($objA);
+            $newAddr->setCustomercode($objC); 
+            $em->merge($newAddr);
+            $em->flush();
+            return $this->redirectToRoute('customer_show', array('customercode'=>$code));
+        }
+        return $this->render('custaddress/newAddress.html.twig', array(
+            'custaddresses' => $custaddresses,
+        ));
+    }
+
+    /**
+     * Lists all custaddress entities.
+     *
+     * @Route("/select/{customercode}/", name="select_address")
+     * @Method("GET")
+     */
+    public function selectAction($customercode, Request $request, Customer $custObj)
+    {
+        $custaddress = new Custaddress();
+        $number = new Address();
+        $session = new Session(new PhpBridgeSessionStorage());
+        $session->start();
+        $session->set('customercode',$customercode);
+        $em = $this->getDoctrine()->getManager();
+       // $custaddresses = $em->getRepository('AppBundle:Custaddress')->findAll();
+       $dq =$em->getRepository('AppBundle:Address')->createQueryBuilder('a');
+       if ($request->query->getAlnum('address')) {
+           $dq->where('a.detail LIKE :inputD')
+              ->setParameter('inputD', '%'. $request->query->getAlnum('address') .'%');
+       }elseif ($request->query->getAlnum('checkbox')) {
+ 
+            $nums = $request->query->get('checkbox');
+            
+            foreach ($nums as $num) 
+            {
+                $number->addressnumber = $num;
+                //dump($number);
+                $custaddress->setCustomercode($custObj);
+                $custaddress->setAddressnumber($number);
+                
+                $em->merge($custaddress);
+          
+                $em->flush();
+            
+            }
+            return $this->redirectToRoute('customer_show', array('customercode'=>$custObj));
+        
+       }
+       $query = $dq->getQuery();
+       $paginator = $this->get('knp_paginator');
+       $custaddresses = $paginator->paginate($query,
+                            $request->query->getInt('page', 1),
+                            $request->query->getInt('limit', 7)   );
+       /*$custaddresses=$dq->select('c')
+                        ->distinct(true)
+                        ->getQuery()
+                        ->getResult(); */     
+        
+        return $this->render('custaddress/select.html.twig', array(
+            'custaddresses' => $custaddresses,
+
+        ));
+    } 
 
     /**
      * Creates a new custaddress entity.
@@ -72,7 +167,8 @@ class CustaddressController extends Controller
     public function showAction(Custaddress $custaddress)
     {
         $deleteForm = $this->createDeleteForm($custaddress);
-
+        $for =$custaddress->getAddressnumber();
+        dump($for);
         return $this->render('custaddress/show.html.twig', array(
             'custaddress' => $custaddress,
             'delete_form' => $deleteForm->createView(),

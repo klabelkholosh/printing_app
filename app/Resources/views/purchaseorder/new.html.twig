@@ -1,6 +1,22 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+	    <script>
+        jQuery(document).ready(function() {
+            $('.js-datepicker').datepicker();
+        });
+    </script>
+{% endblock %}
+
+
    <a href="{{ path('purchaseorder_index') }}" class="btn btn-default">Back to the list</a>
     <h1 class="page-header">Purchaseorder creation</h1>
 
@@ -12,4 +28,5 @@
    
             
     
+
 {% endblock %}

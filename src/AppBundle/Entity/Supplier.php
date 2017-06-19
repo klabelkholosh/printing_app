@@ -26,9 +26,9 @@ class Supplier
      *
      * @ORM\Column(name="suppliercode", type="string", length=10)
      * @ORM\Id
-
+     *
      */
-    private $suppliercode;
+    public $suppliercode;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -51,6 +51,11 @@ class Supplier
     public function __construct()
     {
         $this->addressnumber = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->suppliercode;
     }
 
 

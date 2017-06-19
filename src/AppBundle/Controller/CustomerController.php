@@ -5,7 +5,10 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Customer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
 
 /**
  * Customer controller.
@@ -52,7 +55,7 @@ class CustomerController extends Controller
         ));
     }
 
-  
+
 
     /**
      * Creates a new customer entity.
@@ -88,11 +91,18 @@ class CustomerController extends Controller
      */
     public function showAction(Customer $customer)
     {
+        $session = new Session(new PhpBridgeSessionStorage());
+
         $deleteForm = $this->createDeleteForm($customer);
-        dump($customer);
+        $customercode =$customer->getCustomercode();
+        $session->set('showcode',$customercode);
+        //dump($session->get('showcode'));
+        $em = $this->getDoctrine()->getManager();
+        $address = $em->getRepository('AppBundle:Custaddress')->findBy(array('customercode' => $customercode ));
         return $this->render('customer/show.html.twig', array(
             'customer' => $customer,
             'delete_form' => $deleteForm->createView(),
+            'custaddresses' => $address,
         ));
     }
 
@@ -105,7 +115,7 @@ class CustomerController extends Controller
     public function editAction(Request $request, Customer $customer)
     {
         $deleteForm = $this->createDeleteForm($customer);
-        $editForm = $this->createForm('AppBundle\Form\CustomerType', $customer);
+        $editForm = $this->createForm('AppBundle\Form\editCustomerType', $customer);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

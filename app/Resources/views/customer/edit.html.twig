@@ -5,12 +5,12 @@
     <h1 class="page-header">Customer edit</h1>
 
     {{ form_start(edit_form) }}
+    	<label for="customercode">Customer Code</label>
+    	<input type="text" value="{{customer.customercode}}" class="form-control" style="margin-bottom:15px" disabled/>
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" class="btn btn-primary"/>
-    {{ form_end(edit_form) }}
-     
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete" class="btn btn-danger">
-            {{ form_end(delete_form) }}
+        
+
+        <input type="submit" value="Edit" class="btn btn-primary" style="margin-bottom:15px"/>
+    
   
 {% endblock %}
