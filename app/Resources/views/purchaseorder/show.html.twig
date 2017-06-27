@@ -1,8 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a href="{{ path('purchaseorder_index') }}" class="btn btn-default">Back to the list</a>
-    <h1 class="page-header">Purchaseorder</h1>
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Purchaseorder</h4></div>
+   <div class="panel-body">
+
+    <a href="{{ path('purchaseorder_index') }}" class="btn btn-default" style="margin-bottom:15px">Back to the list</a>
     <a href="{{ path('polines_new') }}" class="btn btn-primary" style="margin-bottom:15px">Create a new poline</a>
     <table class="table">
         <tbody>
@@ -35,6 +38,8 @@
                 <th>Stkunitconv</th>
                 <th>Status</th>
                 <th>Person</th>
+                <th>Materialcode</th>
+                <th>Mat Description</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -45,8 +50,18 @@
                 <td>{{ poline.priceunit }}</td>
                 <td>{{ poline.price }}</td>
                 <td>{{ poline.stkunitconv }}</td>
-                <td>{{ poline.status }}</td>
+                {% if poline.status == 'O' %}
+                    <td>Ordered</td>
+                {% elseif poline.status == 'R' %}
+                    <td>Received</td>
+                {% elseif poline.status == 'C' %}
+                    <td>Complete</td>
+                {% elseif poline.status == 'D' %}
+                    <td>Deleted</td>   
+                {% endif %}
                 <td>{{ poline.person }}</td>
+                <td>{{ poline.materialcode }}</td>
+                <td>{{ poline.materialcode.description }}</td>
                 <td>
 
                             <a href="{{ path('polines_show', { 'ponumber': poline.ponumber }) }}" class="btn btn-danger">Delete</a>
@@ -66,5 +81,8 @@
             {{ form_start(delete_form) }}
                 <input type="submit" value="Delete" class="btn btn-danger">
             {{ form_end(delete_form) }}
-    
+            </div><!-- .Panel Content -->
+      </div>
+  <div class="panel-footer">Copyright 2017 Prinfor</div>
+</div>     
 {% endblock %}

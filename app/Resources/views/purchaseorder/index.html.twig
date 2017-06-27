@@ -1,11 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1 class="page-header">Purchaseorders list</h1>
-    <a href="{{ path('purchaseorder_new') }}" class="btn btn-primary">Create a new purchaseorder</a>
-    <a href="{{ path('purchase_newOrder') }}" class="btn btn-primary">Purchase New Material</a>
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Purchaseorders list</h4></div>
+   <div class="panel-body">
+    
+    <a href="{{ path('purchase_newOrder') }}" class="btn btn-primary">Create a new purchaseorder</a>
+    <a href="{{ path('purchase_maintenance') }}" class="btn btn-primary">Purchaseorder Maintenance</a>
+    <form action="{{ path('purchaseorder_index')}}" method="get">
     <table class="table">
         <thead>
+                <tr>
+                <th>
+                <div class="row">
+                    <div class="col-lg-10">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="pofilter_filter" placeholder="Supplier Code">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                            </span>
+                        </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+
+             
+            </tr>
             <tr>
                 <th>PO Number</th>
                 <th>Supplier code</th>
@@ -18,10 +42,10 @@
         <tbody>
         {% for purchaseorder in purchaseorders %}
             <tr>
-                <td>{{ purchaseorder.ponumber }}</td>
+                <td><a href="{{ path('purchaseorder_show', { 'ponumber': purchaseorder.ponumber }) }}">{{ purchaseorder.ponumber }}</a></td>
                 <td>{{ purchaseorder.suppliercode }}</td>
                 <td>{{ purchaseorder.suppliercode.suppliername }}</td>
-                <td><a href="{{ path('purchaseorder_show', { 'ponumber': purchaseorder.ponumber }) }}">{{ purchaseorder.daterequired|date("m/d/y") }}</a></td>
+                <td>{{ purchaseorder.daterequired|date("m/d/y") }}</td>
                 
                 <td>
                    
@@ -34,8 +58,12 @@
         {% endfor %}
         </tbody>
     </table>
-
-   
-           
-    
+</form>
+  <div class="navigation text-center">     
+    {{ knp_pagination_render(purchaseorders) }}
+</div>
+</div><!-- .Panel Content -->
+      </div>
+  <div class="panel-footer">Copyright 2017 Prinfor</div>
+</div>     
 {% endblock %}

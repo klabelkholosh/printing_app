@@ -6,6 +6,7 @@
     </indexes>
     <id name="ponumber" type="integer" column="ponumber">
       <generator strategy="SEQUENCE"/>
+      <one-to-many field="ponumber" target-entity="Polines" mapped-by="ponumber"/>
       <sequence-generator sequence-name="purchaseorder_ponumber_seq" allocation-size="1" initial-value="1"/>
     </id>
     <field name="daterequired" type="date" column="daterequired" nullable="true"/>

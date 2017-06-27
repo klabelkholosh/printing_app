@@ -29,6 +29,7 @@
       </options>
     </field>
     <field name="minimumstock" type="decimal" column="minimumstock" precision="10" scale="0" nullable="true"/>
+    <field name="averageprice" type="decimal" column="averageprice" precision="10" scale="0" nullable="true"/>
     <field name="status" type="string" column="status" length="1" nullable="true">
       <options>
         <option name="fixed">1</option>

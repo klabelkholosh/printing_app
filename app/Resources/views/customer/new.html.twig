@@ -1,12 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a href="{{ path('customer_index') }}" class="btn btn-default">Back to the list</a>
-    <h1 class="page-header">Customer creation</h1>
-
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Customer creation</h4></div>
+   <div class="panel-body">
+    <a href="{{ path('customer_index') }}" class="btn btn-default" style="margin-bottom:15px">Back to the list</a>
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <input type="submit" value="Create" class="btn btn-primary"/>
     {{ form_end(form) }}
+      </div><!-- .Panel Content -->
+      </div>
+  <div class="panel-footer">Copyright 2017 Prinfor</div>
+</div>
 
 {% endblock %}

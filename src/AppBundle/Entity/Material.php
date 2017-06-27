@@ -86,8 +86,12 @@ class Material
     private $matgroup;
 
 
-
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="averageprice", type="decimal", precision=10, scale=0, nullable=true)
+     */
+    private $averageprice;
   
     public function __toString()
     {
@@ -289,6 +293,29 @@ class Material
     {
         return $this->matgroup;
     }
+    
+    /**
+     * Set averageprice
+     *
+     * @param string $averageprice
+     *
+     * @return Material
+     */
+    public function setAverageprice($averageprice)
+    {
+        $this->averageprice = $averageprice;
 
+        return $this;
+    }
+
+    /**
+     * Get averageprice
+     *
+     * @return string
+     */
+    public function getAverageprice()
+    {
+        return $this->averageprice;
+    }
 
 }

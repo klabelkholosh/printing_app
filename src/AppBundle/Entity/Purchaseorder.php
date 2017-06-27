@@ -27,9 +27,10 @@ class Purchaseorder
      * @ORM\Column(name="ponumber", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Polines", mappedBy="ponumber")
      * @ORM\SequenceGenerator(sequenceName="purchaseorder_ponumber_seq", allocationSize=1, initialValue=1)
      */
-    private $ponumber;
+    public $ponumber;
 
     /**
      * @var \AppBundle\Entity\Supplier

@@ -1,8 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  <a href="{{ path('address_index') }}" class = "btn btn-default">Back to the list</a>
-    <h1 class="page-header">Address creation</h1>
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Address creation</h4></div>
+   <div class="panel-body">
+
+
+  <a href="{{ path('address_index') }}" class = "btn btn-default" style="margin-bottom:15px">Back to the list</a>
+   
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -10,6 +15,9 @@
     {{ form_end(form) }}
 
     
-          
+      </div><!-- .Panel Content -->
+      </div>
+  <div class="panel-footer">Copyright 2017 Prinfor</div>
+</div>        
 
 {% endblock %}

@@ -1,8 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<a href="" class="btn btn-default">Back</a>
-    <h1 class="page-header">Custaddresses list</h1>
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Custaddresses list</h4></div>
+   <div class="panel-body">
+
+ 
    
    <form  method="get">
     <table class="table">
@@ -50,4 +53,8 @@
     {{ knp_pagination_render(custaddresses) }}
 </div>
       
+                </div><!-- .Panel Content -->
+      </div>
+  <div class="panel-footer">Copyright 2017 Prinfor</div>
+</div>  
 {% endblock %}
