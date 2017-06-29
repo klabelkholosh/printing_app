@@ -42,9 +42,10 @@
                  <th>{{ knp_pagination_sortable(materials,'Material Code','m.materialcode')}}</th>
                 <th scope="row">Description</th>
                 <th>Type</th>
-                <th>Stockunit</th>
-                <th>Priceunit</th>
-                <th>Minimumstock</th>
+                <th>Stock unit</th>
+                <th>Price unit</th>
+                <th>Minimum stock</th>
+                <th>Average price</th>
                 <th>Status</th>
                
                 <th>Actions</th>
@@ -59,6 +60,7 @@
                 <td>{{ material.stockunit }}</td>
                 <td>{{ material.priceunit }}</td>
                 <td>{{ material.minimumstock }}</td>
+                <td>{{ material.averageprice }}</td>
                 <td>{{ material.status }}</td>
                 
                 <td>

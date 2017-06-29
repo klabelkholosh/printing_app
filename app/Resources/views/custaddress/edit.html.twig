@@ -1,8 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-     <a href="{{ path('custaddress_index') }}" class="btn btn-default">Back to the list</a>
-    <h1 class="page-header">Custaddress edit</h1>
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Custaddress edit</h4></div>
+   <div class="panel-body">
+     <a href="{{ path('custaddress_index') }}" class="btn btn-default" style="margin-bottom:15px">Back to the list</a>
+
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
@@ -15,5 +18,9 @@
             {{ form_start(delete_form) }}
                 <input type="submit" value="Delete" class="btn btn-danger">
             {{ form_end(delete_form) }}
+      </div><!-- .Panel Content -->
+      </div>
+  <div class="panel-footer">Copyright 2017 Prinfor</div>
+</div>
     
 {% endblock %}

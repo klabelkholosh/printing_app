@@ -1,8 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<a href="{{ path('purchaseorder_index') }}" class="btn btn-default">Back to the list</a>
-    <h1 class="page-header">Purchaseorder edit</h1>
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+	    <script>
+        jQuery(document).ready(function() {
+            $('.js-datepicker').datepicker();
+        });
+    </script>
+{% endblock %}
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Purchaseorder edit</h4></div>
+   <div class="panel-body">
+
+<a href="{{ path('purchaseorder_index') }}" class="btn btn-default" style="margin-bottom:15px">Back to the list</a>
+   
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
@@ -15,5 +33,8 @@
             {{ form_start(delete_form) }}
                 <input type="submit" value="Delete" class="btn btn-danger">
             {{ form_end(delete_form) }}
-        
+                        </div><!-- .Panel Content -->
+      </div>
+  <div class="panel-footer">Copyright 2017 Prinfor</div>
+</div>  
 {% endblock %}

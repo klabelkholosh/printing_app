@@ -1,8 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<a href="{{ path('customer_index') }}" class="btn btn-default">Back to the list</a>
-<h3 class="page-header">Customer Details</h3>
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Customer Details</h4></div>
+   <div class="panel-body">
+
+<a href="{{ path('customer_index') }}" class="btn btn-default" style="margin-bottom:15px" style="margin-bottom:15px">Back to the list</a>
 <div>
 <a href="{{ path('select_address', { 'customercode': customer.customercode }) }}" class="btn btn-primary">Add Address</a>
 <a href="{{ path('address_new') }}" }}" class="btn btn-primary">Create Address</a>
@@ -69,5 +72,8 @@
         </td>
         </tbody>
     </table>
-
+      </div><!-- .Panel Content -->
+      </div>
+  <div class="panel-footer">Copyright 2017 Prinfor</div>
+</div>
 {% endblock %}

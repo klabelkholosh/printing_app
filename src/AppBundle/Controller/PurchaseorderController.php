@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
 
 /**
  * Purchaseorder controller.
@@ -23,14 +25,76 @@ class PurchaseorderController extends Controller
      * @Route("/", name="purchaseorder_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $purchaseorders = $em->getRepository('AppBundle:Purchaseorder')->findAll();
-
+        //$purchaseorders = $em->getRepository('AppBundle:Purchaseorder')->findAll();
+        $dql = $em->getRepository('AppBundle:Purchaseorder')->createQueryBuilder('p');
+        if ($request->query->getAlnum('pofilter_filter')) {
+            $dql->where('IDENTITY(p.suppliercode) LIKE :number')
+                ->setParameter('number', '%'. $request->query->get('pofilter_filter') .'%');
+        }
+        $dql->orderBy('p.ponumber','DESC');
+        $query = $dql->getQuery();
+        $paginator = $this->get('knp_paginator');
+        $purchaseorders = $paginator->paginate($query,
+                             $request->query->getInt('page', 1),
+                             $request->query->getInt('limit', 5)   );
         return $this->render('purchaseorder/index.html.twig', array(
             'purchaseorders' => $purchaseorders,
+        ));
+    }
+
+  /** Lists all supplier entities.
+     *
+     * @Route("/maintenance/", name="purchase_maintenance")
+     * @Method("GET")
+     */
+    public function maintenanceAction(Request $request)
+    {
+        $purchaseorder = new Purchaseorder();
+        $supplier = new Supplier();
+        $em = $this->getDoctrine()->getManager();
+        //$suppliers = $em->getRepository('AppBundle:Supplier')->findAll();
+        $dql = $em->getRepository('AppBundle:Supplier')->createQueryBuilder('s');
+        $dqlPonumber = $em->getRepository('AppBundle:Polines')->createQueryBuilder('p');
+        $dqlMaterial = $em->getRepository('AppBundle:Material')->createQueryBuilder('m');
+        if ($request->query->getAlnum('Ponumber_filter')) {
+
+            $dqlPonumber->where('IDENTITY(p.ponumber) LIKE :po_num')
+                ->setParameter('po_num', '%'. $request->query->get('Ponumber_filter') .'%');
+
+        }
+        elseif ($request->query->getAlnum('supplier_filter')) {
+
+                $dql->where('s.suppliercode LIKE :sup_code')
+                ->setParameter('sup_code', '%'. $request->query->get('supplier_filter') .'%');
+            } 
+            elseif ($request->query->getAlnum('material_filter')) {
+                  $dqlMaterial->where('m.materialcode LIKE :mat_code')
+                ->setParameter('mat_code', '%'. $request->query->get('material_filter') .'%');
+            }
+
+            //return $this->redirectToRoute('purchaseorder_index', array('ponumber' => $purchaseorder->getPonumber()));
+        
+        
+        $query = $dql->getQuery();
+        $queryPonum = $dqlPonumber->getQuery();
+        $queryMat = $dqlMaterial->getQuery();
+        $paginator = $this->get('knp_paginator');
+        $suppliers = $paginator->paginate($query,
+                             $request->query->getInt('page', 1),
+                             $request->query->getInt('limit', 10)   );
+        /*$polines = $paginator->paginate($queryPonum,
+                             $request->query->getInt('page', 1),
+                             $request->query->getInt('limit', 10)   );*/
+        $materials = $paginator->paginate($queryMat,
+                             $request->query->getInt('page', 1),
+                             $request->query->getInt('limit', 10)   );
+        return $this->render('purchaseorder/PoMaintanace.html.twig', array(
+            'suppliers' => $suppliers,
+            //'polines' => $polines,
+            'materials' => $materials,
         ));
     }
 
@@ -59,7 +123,6 @@ class PurchaseorderController extends Controller
             foreach ($supplier_id as $id) {
                 $supplier->suppliercode = $id;
                 $ponumber = $purchaseorder->getPonumber();
-                var_dump($ponumber);
                 $purchaseorder->setDaterequired(\DateTime::createFromFormat('d-m-Y', $date));
                 $purchaseorder->setSuppliercode($supplier);
                 $em->merge($purchaseorder);
@@ -86,10 +149,11 @@ class PurchaseorderController extends Controller
      */
     public function newAction(Request $request)
     {
+        
         $purchaseorder = new Purchaseorder();
         $form = $this->createForm('AppBundle\Form\PurchaseorderType', $purchaseorder);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($purchaseorder);
@@ -112,6 +176,8 @@ class PurchaseorderController extends Controller
      */
     public function showAction(Purchaseorder $purchaseorder)
     {
+        $session = new Session(new PhpBridgeSessionStorage());
+        $session->set('showpoline',$purchaseorder->getPonumber());
         $deleteForm = $this->createDeleteForm($purchaseorder);
         $ponumber = $purchaseorder->getPonumber();
         $em = $this->getDoctrine()->getManager();

@@ -1,10 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1 class="page-header">Purchase Order</h1>
+    {% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+        <script>
+        jQuery(document).ready(function() {
+            $('.js-datepicker').datepicker();
+        });
+    </script>
+{% endblock %}
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Purchase Order</h4></div>
+   <div class="panel-body">
+    
     <form method="get">
     <table>
-    
+
     <tr>
       <label class="control-label col-sm-2 requiredField" for="date">
        Date
@@ -15,7 +32,7 @@
       
          <i class="fa fa-calendar" >
          </i>
-        <input class="form-control" id="date" name="date" placeholder="DD-MM-YYYY" type="date" />
+        <input class="form-control" id="" name="date" widget= "single_text" placeholder="DD-MM-YYYY" type="date" />
        
     </tr> 
 
@@ -59,6 +76,10 @@
         </tbody>
     </table>
 </form>
-            
-  
+  <div class="navigation text-center">     
+    {{ knp_pagination_render(suppliers) }}
+</div>   
+                  </div><!-- .Panel Content -->
+      </div>
+{% include 'footer.html.twig' %}
 {% endblock %}

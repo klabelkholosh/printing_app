@@ -24,6 +24,7 @@ class MaterialType extends AbstractType
             ->add('stockunit', TextType::class, array('attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px', 'placeholder'=>'Enter Stock Unit')))
             ->add('priceunit', TextType::class, array('attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px', 'placeholder'=>'Enter Price Amount')))
             ->add('minimumstock', TextType::class, array('attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px', 'placeholder'=>'Enter Minimum Stock Unit')))
+            ->add('averageprice', TextType::class, array('attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px', 'placeholder'=>'Enter avarage price')))
             ->add('status', ChoiceType::class, array('choices'=>array('Normal'=>'N', 'Consignment'=>'C', 'Low'=>'L', 'Deprecated'=>'D'), 'attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
 ;
            /* ->add('matgroup', EntityType::class, array(

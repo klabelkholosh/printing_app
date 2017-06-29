@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-   <a href="{{ path('customer_index') }}" class="btn btn-default">Back to the list</a>
-    <h1 class="page-header">Customer edit</h1>
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Customer edit</h4></div>
+   <div class="panel-body">
+
+   <a href="{{ path('customer_index') }}" class="btn btn-default" style="margin-bottom:15px">Back to the list</a>
+   
 
     {{ form_start(edit_form) }}
     	<label for="customercode">Customer Code</label>
@@ -12,5 +16,8 @@
 
         <input type="submit" value="Edit" class="btn btn-primary" style="margin-bottom:15px"/>
     
-  
+        </div><!-- .Panel Content -->
+      </div>
+  <div class="panel-footer">Copyright 2017 Prinfor</div>
+</div>
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<a href="{{ path('polines_index') }}" class="btn btn-default">Back to the list</a>
+<a href="{{ path('purchaseorder_show', { 'ponumber':poline.ponumber }) }}" class="btn btn-default">Back to the list</a>
     <h1>Poline</h1>
 
     <table class="table">
@@ -24,7 +24,15 @@
             </tr>
             <tr>
                 <th>Status</th>
-                <td>{{ poline.status }}</td>
+                {% if poline.status == 'O' %}
+                    <td>Ordered</td>
+                {% elseif poline.status == 'R' %}
+                    <td>Received</td>
+                {% elseif poline.status == 'C' %}
+                    <td>Complete</td>
+                {% elseif poline.status == 'D' %}
+                    <td>Deleted</td>   
+                {% endif %}
             </tr>
             <tr>
                 <th>Person</th>

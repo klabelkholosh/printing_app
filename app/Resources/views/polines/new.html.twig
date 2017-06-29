@@ -1,14 +1,57 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<a href="{{ path('polines_index') }}" class="btn btn-default">Back to the list</a>
-    <h1 class="page-header">Poline creation</h1>
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Poline creation</h4></div>
+   <div class="panel-body">
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" class="btn btn-primary"/>
-    {{ form_end(form) }}
+  <a href="{{ path('polines_index') }}" class="btn btn-default" style="margin-bottom:15px" >Back to the list</a>
+   
+<form name="appbundle_polines" method="post">
+        <div id="appbundle_polines">
+
+<div>
+<label for="appbundle_polines_stkunitconv" class="required">Purchase Order Number</label>
+<input type="text" id="appbundle_polines_stkunitconv" name="ponumber" value="{{ poline }}" required="required" class="form-control" style="margin-bottom:15px" placeholder="Enter stock unit conv" disabled/>
+</div>
+
+<div>
+<label for="appbundle_polines_stkunitconv" class="required">Material</label>
+<input type="text" id="appbundle_polines_stkunitconv" name="ponumber" value="{{ material.description }}" required="required" class="form-control" style="margin-bottom:15px" placeholder="Enter stock unit conv" disabled/>
+</div>
+
+<div>
+<label for="appbundle_polines_price" class="required">Price</label>
+<input type="text" id="appbundle_polines_price" name="price" required="required" value="{{ material.averageprice }}"  class="form-control" style="margin-bottom:15px" placeholder="Enter price" />
+</div>
+
+<div>
+<label for="appbundle_polines_priceunit" class="required">Price unit</label>
+<input type="text" id="appbundle_polines_priceunit" name="priceunit" required="required" value="{{ material.priceunit }}"  class="form-control" style="margin-bottom:15px" placeholder="Enter price unit"/>
+</div>
+<div>
+<label for="appbundle_polines_stkunitconv" class="required">Stock unit</label>
+<input type="text" id="appbundle_polines_stkunitconv" name="stkunit" value="{{ material.stockunit }}" required="required" class="form-control" style="margin-bottom:15px" placeholder="Enter stock unit conv" disabled/>
+</div>
+<div>
+<label for="appbundle_polines_quantity" class="required">Quantity</label>
+<input type="text" id="appbundle_polines_quantity" name="quantity" required="required"  class="form-control" style="margin-bottom:15px" placeholder="Enter quantity" />
+</div>
 
 
-    
+<div>
+<label for="appbundle_polines_stkunitconv" class="required">Stock unit conv</label>
+<input type="text" id="appbundle_polines_stkunitconv" name="stkunitconv" required="required" class="form-control" style="margin-bottom:15px" placeholder="Enter stock unit conv" />
+</div>
+
+<div>
+<label for="appbundle_polines_person" class="required">Person</label>
+<input type="text" id="appbundle_polines_person" name="person" required="required" class="form-control" style="margin-bottom:15px" placeholder="Enter person" />
+</div>
+
+<input type="submit" value="Create" class="btn btn-primary"/>
+</form>
+    </div>
+    </div>
+ {% include 'footer.html.twig' %}
 {% endblock %}

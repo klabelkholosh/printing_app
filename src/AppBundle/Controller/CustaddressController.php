@@ -53,7 +53,7 @@ class CustaddressController extends Controller
         $session = new Session(new PhpBridgeSessionStorage());
         $em = $this->getDoctrine()->getManager();
         $code = $session->get('showcode');
-        dump($code);
+      
         $custaddresses = $em->getRepository('AppBundle:Address')->findOneBy(array('addressnumber'=>$addressnumber));
         $newAddr = new Custaddress();
         $objC = new Customer();

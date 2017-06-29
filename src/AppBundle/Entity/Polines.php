@@ -59,7 +59,7 @@ class Polines
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Purchaseorder")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Purchaseorder")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="ponumber", referencedColumnName="ponumber")
      * })
@@ -76,7 +76,10 @@ class Polines
      */
     private $materialcode;
 
-
+    public function __construct()
+    {
+        $this->materialcode = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Set quantity
