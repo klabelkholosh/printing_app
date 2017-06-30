@@ -9,24 +9,32 @@ use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * Custaddress
- *@ApiResource
+ * @ApiResource
  *
- * @ORM\Table(name="custaddress", indexes={@ORM\Index(name="custaddress_pkey", columns={"customercode", "addressnumber"}), @ORM\Index(name="IDX_C3C7DF8C758D7794", columns={"customercode"})})
+ * @ORM\Table(name="custaddress", indexes={@ORM\Index(name="custaddress_pkey", columns={"customercode", "addressnumber"}), @ORM\Index(name="IDX_C3C7DF8C2B0D84E8", columns={"addressnumber"}), @ORM\Index(name="IDX_C3C7DF8C758D7794", columns={"customercode"})})
  * @ORM\Entity
  */
 class Custaddress
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="custaddress_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
      * @var \AppBundle\Entity\Address
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Address")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Address")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="addressnumber", referencedColumnName="addressnumber")
      * })
      */
-    public $addressnumber;
+    private $addressnumber;
 
     /**
      * @var \AppBundle\Entity\Customer
@@ -35,20 +43,20 @@ class Custaddress
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="customercode", referencedColumnName="customercode")
      * })
-     * 
      */
     private $customercode;
 
-    public function __construct()
-    {
-       $this->customercode = new ArrayCollection();
-    }
 
-   public function __toString()
-    {
-        return $this->addressnumber;
-    }
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set addressnumber
@@ -57,7 +65,7 @@ class Custaddress
      *
      * @return Custaddress
      */
-    public function setAddressnumber(\AppBundle\Entity\Address $addressnumber)
+    public function setAddressnumber(\AppBundle\Entity\Address $addressnumber = null)
     {
         $this->addressnumber = $addressnumber;
 
@@ -83,7 +91,6 @@ class Custaddress
      */
     public function setCustomercode(\AppBundle\Entity\Customer $customercode = null)
     {
-        
         $this->customercode = $customercode;
 
         return $this;

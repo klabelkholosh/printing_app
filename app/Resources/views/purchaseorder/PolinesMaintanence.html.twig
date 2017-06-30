@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Material Maintanence list</h4></div>
+   <div class="panel-body">
+ <form action="{{ path('polines_maintanence')}}" method="get">
+<table class="table">
+      <thead>
+      <tr>
+                  <div class="input-group" style="margin-bottom:15px">
+                            <input type="text" class="form-control" name="Ponumber_filter" placeholder="Ponumber">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit" data-backdrop="static"><span class="glyphicon glyphicon-search"></span></button>
+                            </span>
+                        </div><!-- /input-group -->
+      </tr>
+                    <tr>
+                <th>PO Number</th>
+                <th>Supplier code</th>
+                <th>Supplier Name</th>
+                <th>Date Required</th>
+                
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for purchaseorder in purchaseorders %}
+            <tr>
+                <td><a href="{{ path('purchaseorder_show', { 'ponumber': purchaseorder.ponumber }) }}">{{ purchaseorder.ponumber }}</a></td>
+                <td>{{ purchaseorder.suppliercode }}</td>
+                <td>{{ purchaseorder.suppliercode.suppliername }}</td>
+                <td>{{ purchaseorder.daterequired|date("m/d/y") }}</td>
+                
+                <td>
+                   
+              <a href="{{ path('purchaseorder_show', { 'ponumber': purchaseorder.ponumber }) }}" class="btn btn-primary">Polines</a>
+                       
+                         
+                       
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </form>
+      </div><!-- .Panel Content -->
+      </div>
+  <div class="panel-footer">Copyright 2017 Prinfor</div>
+</div>
+{% endblock %}

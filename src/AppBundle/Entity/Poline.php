@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Polines
+ * Poline
  *
- * @ORM\Table(name="polines", indexes={@ORM\Index(name="poline_pkey", columns={"ponumber", "materialcode"}), @ORM\Index(name="IDX_185C9518C443594", columns={"materialcode"})})
+ * @ORM\Table(name="poline", uniqueConstraints={@ORM\UniqueConstraint(name="poline_person_key", columns={"person"})}, indexes={@ORM\Index(name="poline_pkey", columns={"ponumber", "materialcode"}), @ORM\Index(name="IDX_51D227148C443594", columns={"materialcode"}), @ORM\Index(name="IDX_51D2271493DECC02", columns={"ponumber"})})
  * @ORM\Entity
  */
-class Polines
+class Poline
 {
     /**
      * @var string
@@ -48,23 +48,14 @@ class Polines
     private $status;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="person", type="string", length=20, nullable=true)
-     */
-    private $person;
-
-    /**
-     * @var \AppBundle\Entity\Purchaseorder
-     *
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Purchaseorder")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ponumber", referencedColumnName="ponumber")
-     * })
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="poline_id_seq", allocationSize=1, initialValue=1)
      */
-    private $ponumber;
+    private $id;
 
     /**
      * @var \AppBundle\Entity\Material
@@ -76,17 +67,34 @@ class Polines
      */
     private $materialcode;
 
-    public function __construct()
-    {
-        $this->materialcode = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    /**
+     * @var \AppBundle\Entity\Purchaseorder
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Purchaseorder")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ponumber", referencedColumnName="ponumber")
+     * })
+     */
+    private $ponumber;
+
+    /**
+     * @var \AppBundle\Entity\Person
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Person")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="person", referencedColumnName="personcode")
+     * })
+     */
+    private $person;
+
+
 
     /**
      * Set quantity
      *
      * @param string $quantity
      *
-     * @return Polines
+     * @return Poline
      */
     public function setQuantity($quantity)
     {
@@ -110,7 +118,7 @@ class Polines
      *
      * @param string $priceunit
      *
-     * @return Polines
+     * @return Poline
      */
     public function setPriceunit($priceunit)
     {
@@ -134,7 +142,7 @@ class Polines
      *
      * @param string $price
      *
-     * @return Polines
+     * @return Poline
      */
     public function setPrice($price)
     {
@@ -158,7 +166,7 @@ class Polines
      *
      * @param string $stkunitconv
      *
-     * @return Polines
+     * @return Poline
      */
     public function setStkunitconv($stkunitconv)
     {
@@ -182,7 +190,7 @@ class Polines
      *
      * @param string $status
      *
-     * @return Polines
+     * @return Poline
      */
     public function setStatus($status)
     {
@@ -202,27 +210,37 @@ class Polines
     }
 
     /**
-     * Set person
+     * Get id
      *
-     * @param string $person
-     *
-     * @return Polines
+     * @return integer
      */
-    public function setPerson($person)
+    public function getId()
     {
-        $this->person = $person;
+        return $this->id;
+    }
+
+    /**
+     * Set materialcode
+     *
+     * @param \AppBundle\Entity\Material $materialcode
+     *
+     * @return Poline
+     */
+    public function setMaterialcode(\AppBundle\Entity\Material $materialcode = null)
+    {
+        $this->materialcode = $materialcode;
 
         return $this;
     }
 
     /**
-     * Get person
+     * Get materialcode
      *
-     * @return string
+     * @return \AppBundle\Entity\Material
      */
-    public function getPerson()
+    public function getMaterialcode()
     {
-        return $this->person;
+        return $this->materialcode;
     }
 
     /**
@@ -230,9 +248,9 @@ class Polines
      *
      * @param \AppBundle\Entity\Purchaseorder $ponumber
      *
-     * @return Polines
+     * @return Poline
      */
-    public function setPonumber(\AppBundle\Entity\Purchaseorder $ponumber)
+    public function setPonumber(\AppBundle\Entity\Purchaseorder $ponumber = null)
     {
         $this->ponumber = $ponumber;
 
@@ -250,26 +268,26 @@ class Polines
     }
 
     /**
-     * Set materialcode
+     * Set person
      *
-     * @param \AppBundle\Entity\Material $materialcode
+     * @param \AppBundle\Entity\Person $person
      *
-     * @return Polines
+     * @return Poline
      */
-    public function setMaterialcode(\AppBundle\Entity\Material $materialcode = null)
+    public function setPerson(\AppBundle\Entity\Person $person = null)
     {
-        $this->materialcode = $materialcode;
+        $this->person = $person;
 
         return $this;
     }
 
     /**
-     * Get materialcode
+     * Get person
      *
-     * @return \AppBundle\Entity\Material
+     * @return \AppBundle\Entity\Person
      */
-    public function getMaterialcode()
+    public function getPerson()
     {
-        return $this->materialcode;
+        return $this->person;
     }
 }

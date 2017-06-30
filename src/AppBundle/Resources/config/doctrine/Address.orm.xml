@@ -2,32 +2,29 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="AppBundle\Entity\Address" table="address">
     <id name="addressnumber" type="integer" column="addressnumber">
- 
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="address_addressnumber_seq" allocation-size="1" initial-value="1"/>
     </id>
     <field name="contact" type="string" column="contact" length="60" nullable="true">
       <options>
         <option name="fixed">1</option>
       </options>
     </field>
-
-    <field name="email" type="string" column="email" length="60" nullable="true">
-      <options>
-        <option name="fixed">1</option>
-      </options>
-    </field>    
-
     <field name="detail" type="string" column="detail" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-
     <field name="type" type="string" column="type" length="1" nullable="true">
       <options>
         <option name="fixed">1</option>
       </options>
     </field>
-
-    <many-to-many field="suppliercode" target-entity="Supplier" mapped-by="addressnumber" fetch="LAZY"/>
+    <field name="email" type="string" column="email" length="60" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+ 
   </entity>
 </doctrine-mapping>

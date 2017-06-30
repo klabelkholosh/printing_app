@@ -62,10 +62,10 @@ class Customer
      * @return Customer
      */
 
-    public function __construct()
+    /*public function __construct()
     {
        $this->customercode = new ArrayCollection();
-    }
+    }*/
 
     public function __toString()
     {

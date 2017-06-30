@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="panel panel-default">
+
+  <div class="panel-heading"><h4>Material Poheader</h4></div>
+
+   <div class="panel-body">
+   <form  method="get">
+    	<div class="input-group" style="margin-bottom:15px">
+                     <select name="status_filter" class="form-control">
+                         <option disabled selected>--Select Status--</option>
+                         <option value="O">Ordered</option>
+                         <option value="R">Received</option>
+                         <option value="C">Complete</option>
+                         <option value="D">Deleted</option>
+                    </select> 
+                     <span class="input-group-btn">
+                         <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></sbutton>
+                     </span>
+        </div><!-- /input-group -->
+      <table class="table">
+        <thead>
+            <tr>
+                <th>Quantity</th>
+                <th>Priceunit</th>
+                <th>Price</th>
+                <th>Stkunitconv</th>
+                <th>Status</th>
+                <th>Person</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for poline in poheader %}
+            <tr>
+                <td><a href="{{ path('polines_show', { 'ponumber': poline.ponumber }) }}">{{ poline.quantity }}</a></td>
+                <td>{{ poline.priceunit }}</td>
+                <td>{{ poline.price }}</td>
+                <td>{{ poline.stkunitconv }}</td>
+                <td>{{ poline.status }}</td>
+                <td>{{ poline.person }}</td>
+                <td>
+                            <a href="{{ path('polines_edit', { 'ponumber': poline.ponumber }) }}" class="btn btn-primary">Amend</a>
+                   
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+     </table>
+
+</form> 
+ 	</div>
+  </div>
+
+{% endblock %}

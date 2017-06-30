@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Purchaseorder;
 use AppBundle\Entity\Supplier;
+use AppBundle\Entity\Material;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -32,7 +33,7 @@ class PurchaseorderController extends Controller
         $dql = $em->getRepository('AppBundle:Purchaseorder')->createQueryBuilder('p');
         if ($request->query->getAlnum('pofilter_filter')) {
             $dql->where('IDENTITY(p.suppliercode) LIKE :number')
-                ->setParameter('number', '%'. $request->query->get('pofilter_filter') .'%');
+                ->setParameter('number', '%'. $request->query->get('pofilter_filter').'%' );
         }
         $dql->orderBy('p.ponumber','DESC');
         $query = $dql->getQuery();
@@ -45,6 +46,54 @@ class PurchaseorderController extends Controller
         ));
     }
 
+  /** List all material entities
+    *
+    * @Route("/material-maintanence/", name="material_maintanence")
+    * @Method("GET")
+    */
+   public function materialMaintanenceAction(Request $request)
+   {
+        $em = $this->getDoctrine()->getManager();
+        $dqlMaterial = $em->getRepository('AppBundle:Material')->createQueryBuilder('m');
+        if ($request->query->getAlnum('material_filter')) {
+                  $dqlMaterial->where('m.materialcode LIKE :mat_code')
+                ->setParameter('mat_code', '%'. $request->query->get('material_filter') .'%');
+        }
+        $queryMat = $dqlMaterial->getQuery();
+        $paginator = $this->get('knp_paginator');
+        $materials = $paginator->paginate($queryMat,
+                             $request->query->getInt('page', 1),
+                             $request->query->getInt('limit', 10)   );
+        return $this->render('purchaseorder/maintaneMaterial.html.twig', array(
+            'materials' => $materials,
+        ));
+   }
+   
+
+  /** List all polines entities
+   *
+   * @Route("/polines-maintanence/", name="polines_maintanence")
+   * @Method("GET")
+   */ 
+  public function polinesMaintanenceAction(Request $request)
+  {
+     $em = $this->getDoctrine()->getManager();
+     $dqlPonumber = $em->getRepository('AppBundle:Purchaseorder')->createQueryBuilder('p');
+     if ($request->query->getAlnum('Ponumber_filter')) {
+
+            $dqlPonumber->where('p.ponumber = :po_num')
+                ->setParameter('po_num',  $request->query->get('Ponumber_filter') );
+        }
+        $queryPonum = $dqlPonumber->getQuery();
+        $paginator = $this->get('knp_paginator');
+        $polines = $paginator->paginate($queryPonum,
+                             $request->query->getInt('page', 1),
+                             $request->query->getInt('limit', 10)   );
+        return $this->render('purchaseorder/PolinesMaintanence.html.twig', array(            
+            'purchaseorders' => $polines,
+        ));
+  }
+
   /** Lists all supplier entities.
      *
      * @Route("/maintenance/", name="purchase_maintenance")
@@ -54,47 +103,24 @@ class PurchaseorderController extends Controller
     {
         $purchaseorder = new Purchaseorder();
         $supplier = new Supplier();
+        //$material = new Material();
         $em = $this->getDoctrine()->getManager();
         //$suppliers = $em->getRepository('AppBundle:Supplier')->findAll();
-        $dql = $em->getRepository('AppBundle:Supplier')->createQueryBuilder('s');
-        $dqlPonumber = $em->getRepository('AppBundle:Polines')->createQueryBuilder('p');
-        $dqlMaterial = $em->getRepository('AppBundle:Material')->createQueryBuilder('m');
-        if ($request->query->getAlnum('Ponumber_filter')) {
-
-            $dqlPonumber->where('IDENTITY(p.ponumber) LIKE :po_num')
-                ->setParameter('po_num', '%'. $request->query->get('Ponumber_filter') .'%');
-
-        }
-        elseif ($request->query->getAlnum('supplier_filter')) {
+        $dql = $em->getRepository('AppBundle:Supplier')->createQueryBuilder('s'); 
+        
+        if ($request->query->getAlnum('supplier_filter')) {
 
                 $dql->where('s.suppliercode LIKE :sup_code')
                 ->setParameter('sup_code', '%'. $request->query->get('supplier_filter') .'%');
             } 
-            elseif ($request->query->getAlnum('material_filter')) {
-                  $dqlMaterial->where('m.materialcode LIKE :mat_code')
-                ->setParameter('mat_code', '%'. $request->query->get('material_filter') .'%');
-            }
-
-            //return $this->redirectToRoute('purchaseorder_index', array('ponumber' => $purchaseorder->getPonumber()));
-        
-        
+            //return $this->redirectToRoute('purchaseorder_index', array('ponumber' => $purchaseorder->getPonumber()));  
         $query = $dql->getQuery();
-        $queryPonum = $dqlPonumber->getQuery();
-        $queryMat = $dqlMaterial->getQuery();
         $paginator = $this->get('knp_paginator');
         $suppliers = $paginator->paginate($query,
                              $request->query->getInt('page', 1),
                              $request->query->getInt('limit', 10)   );
-        /*$polines = $paginator->paginate($queryPonum,
-                             $request->query->getInt('page', 1),
-                             $request->query->getInt('limit', 10)   );*/
-        $materials = $paginator->paginate($queryMat,
-                             $request->query->getInt('page', 1),
-                             $request->query->getInt('limit', 10)   );
         return $this->render('purchaseorder/PoMaintanace.html.twig', array(
             'suppliers' => $suppliers,
-            //'polines' => $polines,
-            'materials' => $materials,
         ));
     }
 
@@ -181,7 +207,7 @@ class PurchaseorderController extends Controller
         $deleteForm = $this->createDeleteForm($purchaseorder);
         $ponumber = $purchaseorder->getPonumber();
         $em = $this->getDoctrine()->getManager();
-        $polines = $em->getRepository('AppBundle:Polines')->findBy(array('ponumber' => $ponumber));
+        $polines = $em->getRepository('AppBundle:Poline')->findBy(array('ponumber' => $ponumber));
         return $this->render('purchaseorder/show.html.twig', array(
             'purchaseorder' => $purchaseorder,
             'delete_form' => $deleteForm->createView(),

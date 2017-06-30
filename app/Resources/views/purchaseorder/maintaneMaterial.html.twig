@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Material Maintanence list</h4></div>
+   <div class="panel-body">
+ <form action="{{ path('material_maintanence')}}" method="get">
+      <div class="input-group" style="margin-bottom:15px">
+                            <input type="text" class="form-control" name="material_filter" placeholder="Material Code">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                            </span>
+                        </div><!-- /input-group -->
+                        
+        <table class="table">
+                    <tr>
+                 <th>{{ knp_pagination_sortable(materials,'Material Code','m.materialcode')}}</th>
+                <th scope="row">Description</th>
+                <th>Type</th>
+                <th>Stockunit</th>
+                <th>Priceunit</th>
+                <th>Minimumstock</th>
+                <th>Status</th>
+               
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for material in materials %}
+            <tr>
+                <td>{{ material.materialcode }}</td>
+                <td><a href="{{ path('material_show', { 'materialcode': material.materialcode }) }}">{{ material.description }}</a></td>
+                <td>{{ material.type }}</td>
+                <td>{{ material.stockunit }}</td>
+                <td>{{ material.priceunit }}</td>
+                <td>{{ material.minimumstock }}</td>
+                <td>{{ material.status }}</td>
+                
+                <td>
+                    <a href="{{ path('supplier_poheader', { 'materialcode': material.materialcode }) }}" class="btn btn-primary">PoLines</a>
+                     
+                </td>
+            </tr>
+        {% endfor %}
+        
+        </tbody>
+    </table>
+    </form>
+   <div class="navigation text-center">     
+    {{ knp_pagination_render(materials) }}
+</div>
+      </div><!-- .Panel Content -->
+      </div>
+  <div class="panel-footer">Copyright 2017 Prinfor</div>
+</div>
+{% endblock %}

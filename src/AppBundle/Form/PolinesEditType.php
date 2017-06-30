@@ -26,8 +26,8 @@ class PolinesEditType extends AbstractType
                 ->add('stkunitconv', TextType::class, 
                         array('attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px', 'placeholder'=>'Enter stock unit conv')))
                 ->add('status', ChoiceType::class, array('choices'=>array('Order'=>'O', 'Received'=>'R', 'Completed'=>'C', 'Deleted'=>'D'), 
-                        'attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
-                ->add('person', TextType::class, 
+                        'attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px')));
+                /*->add('person', TextType::class, 
                         array('attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px', 'placeholder'=>'Enter person')));
                 /*->add('materialcode', EntityType::class, 
                         array('class'=>'AppBundle:Material', 'choice_label'=>'materialcode', 'multiple'=>true,
@@ -43,7 +43,7 @@ class PolinesEditType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Polines'
+            'data_class' => 'AppBundle\Entity\Poline'
         ));
     }
 

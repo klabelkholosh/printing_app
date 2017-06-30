@@ -21,7 +21,7 @@ class Person
      * @ORM\Column(name="personcode", type="string", length=20)
      * @ORM\Id
      */
-    private $personcode;
+    public $personcode;
 
     /**
      * @var string
@@ -51,6 +51,11 @@ class Person
      */
     private $fingerprint;
 
+    public function __toString()
+    {
+        return $this->personcode;
+    }
+
 
 
      /**
@@ -76,6 +81,7 @@ class Person
     {
         return $this->personcode;
     }   
+
 
 
     /**

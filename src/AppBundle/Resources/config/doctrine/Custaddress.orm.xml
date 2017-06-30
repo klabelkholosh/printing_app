@@ -3,14 +3,18 @@
   <entity name="AppBundle\Entity\Custaddress" table="custaddress">
     <indexes>
       <index name="custaddress_pkey" columns="customercode,addressnumber"/>
+      <index name="IDX_C3C7DF8C2B0D84E8" columns="addressnumber"/>
       <index name="IDX_C3C7DF8C758D7794" columns="customercode"/>
     </indexes>
-    <id name="addressnumber" association-key="true"/>
-    <one-to-one field="addressnumber" target-entity="Address" fetch="LAZY">
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="custaddress_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <many-to-one field="addressnumber" target-entity="Address" fetch="LAZY">
       <join-columns>
         <join-column name="addressnumber" referenced-column-name="addressnumber"/>
       </join-columns>
-    </one-to-one>
+    </many-to-one>
     <many-to-one field="customercode" target-entity="Customer" fetch="LAZY">
       <join-columns>
         <join-column name="customercode" referenced-column-name="customercode"/>

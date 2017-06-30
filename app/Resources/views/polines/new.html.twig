@@ -1,13 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<style>
+	fieldset {
+    	margin: 8px;
+    	border: 1px solid silver;
+    	padding: 8px;    
+    	border-radius: 4px;
+	}
+
+	legend {
+ 	   padding: 2px;    
+	}
+</style>
 <div class="panel panel-default">
   <div class="panel-heading"><h4>Poline creation</h4></div>
    <div class="panel-body">
 
   <a href="{{ path('polines_index') }}" class="btn btn-default" style="margin-bottom:15px" >Back to the list</a>
    
-<form name="appbundle_polines" method="post">
+<form name="appbundle_polines" method="post|get">
         <div id="appbundle_polines">
 
 <div>
@@ -44,10 +56,52 @@
 <input type="text" id="appbundle_polines_stkunitconv" name="stkunitconv" required="required" class="form-control" style="margin-bottom:15px" placeholder="Enter stock unit conv" />
 </div>
 
-<div>
-<label for="appbundle_polines_person" class="required">Person</label>
-<input type="text" id="appbundle_polines_person" name="person" required="required" class="form-control" style="margin-bottom:15px" placeholder="Enter person" />
+<fieldset>
+<b>Person<b>
+    <div class="row">
+                    <div class="col-lg-10">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="pcode_filter" placeholder="Person Code">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                            </span>
+                        </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+    <table class="table">
+    <thead>
+                <tr>
+                 <th>Person Code</th>
+                <th>Name</th>               
+                <th>Select Person</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for person in persons %}
+            <tr>
+                <td>{{ person.personcode }}</td>
+                <td>{{ person.name }} </td>
+           
+                
+                <td>
+                  <input type="radio" name="personcode" value="{{ person.personcode }}" class="radio">
+                            
+                     
+                </td>
+            </tr>
+        {% endfor %}
+      
+        </tbody>
+ 
+     </table>
+      <div class="text-center">     
+    {{ knp_pagination_render(persons) }}
 </div>
+</fieldset>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+      
+    {{ form_end(form) }}
 
 <input type="submit" value="Create" class="btn btn-primary"/>
 </form>

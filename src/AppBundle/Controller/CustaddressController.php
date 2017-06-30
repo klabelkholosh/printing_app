@@ -55,10 +55,12 @@ class CustaddressController extends Controller
         $code = $session->get('showcode');
       
         $custaddresses = $em->getRepository('AppBundle:Address')->findOneBy(array('addressnumber'=>$addressnumber));
+
         $newAddr = new Custaddress();
         $objC = new Customer();
         
         $objC->customercode = $code;
+        dump($objC);
         if ($request->query->getAlnum('checkbox'))
         {
             $nums = $request->query->get('checkbox');

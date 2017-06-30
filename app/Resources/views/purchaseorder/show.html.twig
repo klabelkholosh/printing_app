@@ -32,21 +32,25 @@
 <table class="table">
         <thead>
             <tr>
+                <th>Person</th>
+                <th>Materialcode</th>
+                <th>Mat Description</th>
                 <th>Quantity</th>
                 <th>Priceunit</th>
                 <th>Price</th>
                 <th>Stkunitconv</th>
                 <th>Status</th>
-                <th>Person</th>
-                <th>Materialcode</th>
-                <th>Mat Description</th>
+                
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for poline in polines %}
             <tr>
-                <td><a href="{{ path('polines_show', { 'ponumber': poline.ponumber|length }) }}">{{ poline.quantity }}</a></td>
+                <td><a href="{{ path('polines_show', { 'ponumber': poline.ponumber }) }}">{{ poline.person.name }}</a></td>
+                <td>{{ poline.materialcode }}</td>
+                <td>{{ poline.materialcode.description }}</td>
+                <td>{{ poline.quantity }}</td>
                 <td>{{ poline.priceunit }}</td>
                 <td>{{ poline.price }}</td>
                 <td>{{ poline.stkunitconv }}</td>
@@ -59,14 +63,12 @@
                 {% elseif poline.status == 'D' %}
                     <td>Deleted</td>   
                 {% endif %}
-                <td>{{ poline.person }}</td>
-                <td>{{ poline.materialcode }}</td>
-                <td>{{ poline.materialcode.description }}</td>
+                
                 <td>
 
                             <a href="{{ path('polines_show', { 'ponumber': poline.ponumber }) }}" class="btn btn-danger">Delete</a>
 
-                            <a href="{{ path('polines_edit', { 'ponumber': poline.ponumber }) }}" class="btn btn-primary">edit</a>
+                            <a href="{{ path('polines_edit', { 'ponumber': poline.ponumber }) }}" class="btn btn-primary">Amend</a>
 
                 </td>
             </tr>

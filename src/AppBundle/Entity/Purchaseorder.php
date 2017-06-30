@@ -27,7 +27,7 @@ class Purchaseorder
      * @ORM\Column(name="ponumber", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Polines", mappedBy="ponumber")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Poline", mappedBy="ponumber")
      * @ORM\SequenceGenerator(sequenceName="purchaseorder_ponumber_seq", allocationSize=1, initialValue=1)
      */
     public $ponumber;
@@ -46,7 +46,7 @@ class Purchaseorder
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Material", inversedBy="ponumber")
-     * @ORM\JoinTable(name="polines",
+     * @ORM\JoinTable(name="poline",
      *   joinColumns={
      *     @ORM\JoinColumn(name="ponumber", referencedColumnName="ponumber")
      *   },

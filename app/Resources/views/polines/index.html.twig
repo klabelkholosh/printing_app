@@ -22,7 +22,15 @@
                 <td>{{ poline.priceunit }}</td>
                 <td>{{ poline.price }}</td>
                 <td>{{ poline.stkunitconv }}</td>
-                <td>{{ poline.status }}</td>
+                 {% if poline.status == 'O' %}
+                    <td>Ordered</td>
+                {% elseif poline.status == 'R' %}
+                    <td>Received</td>
+                {% elseif poline.status == 'C' %}
+                    <td>Complete</td>
+                {% elseif poline.status == 'D' %}
+                    <td>Deleted</td>   
+                {% endif %}
                 <td>{{ poline.person }}</td>
                 <td>
                             <a href="{{ path('polines_show', { 'ponumber': poline.ponumber }) }}" class="btn btn-success">show</a>

@@ -1,62 +1,52 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<style>
-#myModal{
-   overflow: visible !important;
-</style>
- <form action="{{ path('purchase_maintenance')}}" method="get">
 <div class="panel panel-default">
-  <div class="panel-heading">Purchase Order Maintanance</div>
+  <div class="panel-heading"><h4>Maintanence</h4></div>
    <div class="panel-body">
- <div class="row" style="margin-top:15px">
-  <div class="col-sm-3">
+    <div class="row" style="margin-top:15px">
+ <form action="{{ path('purchase_maintenance') }}" method="get">
   <a href="{{ path('purchase_newOrder') }}" class="btn btn-primary">New Purchase Order</a>
-</div><!-- .col-sm-4 -->
-  <div class="col-sm-3">
-                            <div class="input-group">
-                            <input type="text" class="form-control" name="Ponumber_filter" placeholder="Ponumber">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                            </span>
-                        </div><!-- /input-group -->
- </div><!-- .col-sm-4 -->
-  <div class="col-sm-3">
-                         <div class="input-group">
-                            <input type="text" class="form-control" name="supplier_filter" placeholder="Supplier Code">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit" ><span class="glyphicon glyphicon-search"></span></button>
-                            </span>
-                        </div><!-- /input-group -->
-  </div><!-- .col-sm-4< -->
-  <div class="col-sm-3">
-                         <div class="input-group">
+
+
                            
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-search"></span> Materialcode</button>
-                            </span>
-                        </div><!-- /input-group -->
-  </div><!-- .col-sm-4 -->
+                                <a class="btn btn-default" href="{{ path('material_maintanence') }}"><span class="glyphicon glyphicon-search"></span> Materialcode</a>
+                            
+                           
+                                <a class="btn btn-default" href="{{ path('polines_maintanence')}}"><span class="glyphicon glyphicon-search"></span> Ponumber</a>
+                           
+                        
+ 
+  <div class="col-sm-3">
+      <div class="input-group">
+         <input type="text" class="form-control" name="supplier_filter" placeholder="Supplier Code">
+         <span class="input-group-btn">
+             <button class="btn btn-default" type="submit" ><span class="glyphicon glyphicon-search"></span></button>
+         </span>
+     </div><!-- /input-group -->
+  </div><!-- .col-sm-4< -->
 
-
+                           
+                                              
 </div> 
-    <table class="table">
+ <table class="table">
     
         <thead>
             <tr>
-                <th>Suppliername</th>
                 <th>Suppliercode</th>
-                <th><input type="submit" value="Add" class="btn btn-primary"/></th>
+                <th>Suppliername</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
        
         {% for supplier in suppliers %}
             <tr>
-                <td><a href="{{ path('supplier_show', { 'suppliercode': supplier.suppliercode }) }}">{{ supplier.suppliername }}</a></td>
-                <td>{{ supplier.suppliercode }}</td>
+              <td><a href="{{ path('supplier_show', { 'suppliercode': supplier.suppliercode }) }}">{{ supplier.suppliercode }}</a></td>
+              <td>{{ supplier.suppliername }}</td>
+                
                 <td>
                   
-                    <input type="checkbox" name="supplier_id[]" value="{{supplier.suppliercode }}">
+                    <a class="btn btn-primary" href="{{ path('supplier_show', { 'suppliercode': supplier.suppliercode }) }}">PoHeaders</a>
                     
                 </td>
             </tr>
@@ -64,69 +54,9 @@
       
         </tbody>
         </table>
-
-    
-
 </form>
-</div><!-- .Panel Content -->
-        <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Material</h4>
-      </div>
-      <div class="modal-body">
-      <div class="input-group">
-                            <input type="text" class="form-control" name="material_filter" placeholder="Material Code">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                            </span>
-                        </div><!-- /input-group -->
-        <table class="table">
-                    <tr>
-                 <th>{{ knp_pagination_sortable(materials,'Material Code','m.materialcode')}}</th>
-                <th scope="row">Description</th>
-                <th>Type</th>
-                <th>Stockunit</th>
-                <th>Priceunit</th>
-                <th>Minimumstock</th>
-                <th>Status</th>
-               
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for material in materials %}
-            <tr>
-                <td>{{ material.materialcode }}</td>
-                <td><a href="{{ path('material_show', { 'materialcode': material.materialcode }) }}">{{ material.description }}</a></td>
-                <td>{{ material.type }}</td>
-                <td>{{ material.stockunit }}</td>
-                <td>{{ material.priceunit }}</td>
-                <td>{{ material.minimumstock }}</td>
-                <td>{{ material.status }}</td>
-                
-                <td>
-                    <a href="{{ path('material_edit', { 'materialcode': material.materialcode }) }}" class = "btn btn-primary">Edit</a>
-                    <a href="{{ path('material_show', { 'materialcode': material.materialcode }) }}" class = "btn btn-danger">Delete</a>
-                            
-                     
-                </td>
-            </tr>
-        {% endfor %}
-        
-        </tbody>
-    </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
+   </div>
   </div>
-</div>
+</div>   
 {% endblock %}

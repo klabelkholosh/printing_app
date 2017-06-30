@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Address
+ *@ApiResource
  *
- * @ApiResource
  * @ORM\Table(name="address")
  * @ORM\Entity
  */
@@ -38,41 +38,24 @@ class Address
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=60, nullable=true)
+     * @ORM\Column(name="email", type="string", length=60, nullable=true)
      */
     private $email;
 
+ 
+
     /**
-     * @var integer 
+     * @var integer
      *
-     * @ORM\Column(name="addressnumber", type="integer", nullable=false)
+     * @ORM\Column(name="addressnumber", type="integer")
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Custaddress")
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="address_addressnumber_seq", allocationSize=1, initialValue=1)
      */
     public $addressnumber;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Supplier", mappedBy="addressnumber")
-     */
-    private $suppliercode;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->suppliercode = new \Doctrine\Common\Collections\ArrayCollection();
 
-    }
-
-    public function __toString()
-    {
-        return $this->addressnumber. '('.$this->detail.')';
-    }
-
-    
     /**
      * Set contact
      *
@@ -145,7 +128,7 @@ class Address
         return $this->type;
     }
 
-   /**
+    /**
      * Set email
      *
      * @param string $email
@@ -169,21 +152,6 @@ class Address
         return $this->email;
     }
 
-   
-
-    /**
-     * Set addressnumber
-     *
-     * @param string $addressnumber
-     *
-     * @return Address
-     */
-    public function setAddressnumber($addressnumber)
-    {
-        $this->addressnumber = $addressnumber;
-
-        return $this;
-    }
 
     /**
      * Get addressnumber
@@ -194,39 +162,4 @@ class Address
     {
         return $this->addressnumber;
     }
-
-    /**
-     * Add suppliercode
-     *
-     * @param \AppBundle\Entity\Supplier $suppliercode
-     *
-     * @return Address
-     */
-    public function addSuppliercode(\AppBundle\Entity\Customer $suppliercode)
-    {
-        $this->suppliercode[] = $suppliercode;
-
-        return $this;
-    }
-
-    /**
-     * Remove suppliercode
-     *
-     * @param \AppBundle\Entity\Supplier $suppliercode
-     */
-    public function removeSuppliercode(\AppBundle\Entity\Customer $suppliercode)
-    {
-        $this->suppliercode->removeElement($suppliercode);
-    }
-
-    /**
-     * Get suppliercode
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSuppliercode()
-    {
-        return $this->suppliercode;
-    }
-    
 }

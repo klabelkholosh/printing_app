@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Custaddress creation</h4></div>
+   <div class="panel-body">
+    <h1 class="page-header">Create PoLine</h1>
+   <a href="{{ path('custaddress_index') }}" class="btn btn-default" style="margin-bottom:15px">Back to the list</a>
+   <form  method="get">
+
+    <table class="table">
+    <thead>
+     <tr>
+                <th>
+                <div class="row">
+                    <div class="col-lg-10">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="material_filter" placeholder="Material Code">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                            </span>
+                        </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+                </th>
+                </tr>
+            <tr>
+                 <th>Material Code</th>
+                <th>Description</th>               
+                <th><input type="submit" class="btn btn-primary" value="create"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for material in materials %}
+            <tr>
+                <td>{{ material.materialcode }}</td>
+                <td>{{ material.description }} </td>
+           
+                
+                <td>
+                   <!-- <a href="{{ path('material_edit', { 'materialcode': material.materialcode }) }}" class = "btn btn-primary">Select</a>-->
+                  <input type="radio" name="mcode" value="{{ material.materialcode }}" class="radio">
+                            
+                     
+                </td>
+            </tr>
+        {% endfor %}
+      
+        </tbody>
+ 
+     </table>
+    </form>
+          </div><!-- .Panel Content -->
+      </div>
+  <div class="panel-footer">Copyright 2017 Prinfor</div>
+</div>    
+{% endblock %}

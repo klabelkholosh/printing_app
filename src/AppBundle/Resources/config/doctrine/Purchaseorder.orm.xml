@@ -6,7 +6,7 @@
     </indexes>
     <id name="ponumber" type="integer" column="ponumber">
       <generator strategy="SEQUENCE"/>
-      <one-to-many field="ponumber" target-entity="Polines" mapped-by="ponumber"/>
+      <one-to-many field="ponumber" target-entity="Poline" mapped-by="ponumber"/>
       <sequence-generator sequence-name="purchaseorder_ponumber_seq" allocation-size="1" initial-value="1"/>
     </id>
     <field name="daterequired" type="date" column="daterequired" nullable="true"/>
@@ -16,7 +16,7 @@
       </join-columns>
     </many-to-one>
     <many-to-many field="materialcode" target-entity="Material" inversed-by="ponumber" fetch="LAZY">
-      <join-table name="polines">
+      <join-table name="poline">
         <join-columns>
           <join-column name="ponumber" referenced-column-name="ponumber"/>
         </join-columns>
