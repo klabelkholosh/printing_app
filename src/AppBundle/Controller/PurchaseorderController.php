@@ -58,7 +58,7 @@ class PurchaseorderController extends Controller
         //$suppliers = $em->getRepository('AppBundle:Supplier')->findAll();
         $dql = $em->getRepository('AppBundle:Supplier')->createQueryBuilder('s');
         $dqlPonumber = $em->getRepository('AppBundle:Polines')->createQueryBuilder('p');
-        $dqlMaterial = $em->getRepository('AppBundle:Material')->createQueryBuilder('m');
+        //$dqlMaterial = $em->getRepository('AppBundle:Material')->createQueryBuilder('m');
         if ($request->query->getAlnum('Ponumber_filter')) {
 
             $dqlPonumber->where('IDENTITY(p.ponumber) LIKE :po_num')
@@ -70,17 +70,17 @@ class PurchaseorderController extends Controller
                 $dql->where('s.suppliercode LIKE :sup_code')
                 ->setParameter('sup_code', '%'. $request->query->get('supplier_filter') .'%');
             } 
-            elseif ($request->query->getAlnum('material_filter')) {
+            /* elseif ($request->query->getAlnum('material_filter')) {
                   $dqlMaterial->where('m.materialcode LIKE :mat_code')
                 ->setParameter('mat_code', '%'. $request->query->get('material_filter') .'%');
-            }
+            } */
 
             //return $this->redirectToRoute('purchaseorder_index', array('ponumber' => $purchaseorder->getPonumber()));
         
         
         $query = $dql->getQuery();
         $queryPonum = $dqlPonumber->getQuery();
-        $queryMat = $dqlMaterial->getQuery();
+        //$queryMat = $dqlMaterial->getQuery();
         $paginator = $this->get('knp_paginator');
         $suppliers = $paginator->paginate($query,
                              $request->query->getInt('page', 1),
@@ -88,9 +88,9 @@ class PurchaseorderController extends Controller
         /*$polines = $paginator->paginate($queryPonum,
                              $request->query->getInt('page', 1),
                              $request->query->getInt('limit', 10)   );*/
-        $materials = $paginator->paginate($queryMat,
+        /*$materials = $paginator->paginate($queryMat,
                              $request->query->getInt('page', 1),
-                             $request->query->getInt('limit', 10)   );
+                             $request->query->getInt('limit', 10)   ); */
         return $this->render('purchaseorder/PoMaintanace.html.twig', array(
             'suppliers' => $suppliers,
             //'polines' => $polines,

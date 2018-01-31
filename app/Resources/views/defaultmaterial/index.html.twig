@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Default Materials list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Default Name</th>
+                <th>Default Value</th>
+                <th>Default Qty</th>
+                <th>Defmatkey</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for defaultmaterial in defaultmaterials %}
+            <tr>
+                <td><a href="{{ path('defaultmaterial_show', { 'defmatkey': defaultmaterial.defmatkey }) }}">{{ defaultmaterial.defaultname }}</a></td>
+                <td>{{ defaultmaterial.defaultvalue }}</td>
+                <td>{{ defaultmaterial.defaultqty }}</td>
+                <td>{{ defaultmaterial.defmatkey }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('defaultmaterial_show', { 'defmatkey': defaultmaterial.defmatkey }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('defaultmaterial_edit', { 'defmatkey': defaultmaterial.defmatkey }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('defaultmaterial_new') }}">Create a new Default Material</a>
+        </li>
+    </ul>
+{% endblock %}

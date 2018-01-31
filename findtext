@@ -1,0 +1,9 @@
+# find text in a file below this dir
+
+for file in `find .`
+do
+  if [ -f $file ]
+  then
+    grep -H $1 $file
+  fi
+done

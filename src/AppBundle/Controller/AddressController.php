@@ -44,9 +44,10 @@ class AddressController extends Controller
     public function newAction(Request $request)
     {
         $address = new Address();
-        $objC = new Customer();
+        /* $objC = new Customer();
         $session = new Session(new PhpBridgeSessionStorage());
         $code = $session->get('customercode');
+        */
        
         $form = $this->createForm('AppBundle\Form\AddressType', $address);
         $form->handleRequest($request);

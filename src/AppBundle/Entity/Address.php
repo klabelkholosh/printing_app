@@ -45,10 +45,12 @@ class Address
     /**
      * @var integer 
      *
-     * @ORM\Column(name="addressnumber", type="integer", nullable=false)
+     * @ORM\Column(name="addressnumber", type="integer")
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Custaddress")
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="address_number_seq", allocationSize=1, initialValue=1)
      */
+    //* @ORM\ManyToOne(targetEntity="AppBundle\Entity\Custaddress")
     public $addressnumber;
 
     /**

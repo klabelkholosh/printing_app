@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Defaultmaterial</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Defaultname</th>
+                <td>{{ defaultmaterial.defaultname }}</td>
+            </tr>
+            <tr>
+                <th>Defaultvalue</th>
+                <td>{{ defaultmaterial.defaultvalue }}</td>
+            </tr>
+            <tr>
+                <th>Defaultqty</th>
+                <td>{{ defaultmaterial.defaultqty }}</td>
+            </tr>
+            <tr>
+                <th>Defmatkey</th>
+                <td>{{ defaultmaterial.defmatkey }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('defaultmaterial_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('defaultmaterial_edit', { 'defmatkey': defaultmaterial.defmatkey }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

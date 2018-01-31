@@ -1,0 +1,9 @@
+{
+  "name": "printing_app",
+  "version": "1.0.0",
+  "description": "Printing Application",
+  "main": "index.js",
+  "repository": "https://github.com/klabelkholosh/printing_app.git",
+  "author": "andydunlop",
+  "license": "MIT"
+}
