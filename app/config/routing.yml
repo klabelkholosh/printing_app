@@ -1,3 +1,5 @@
+
+
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
@@ -6,10 +8,7 @@ api:
     resource: '.'
     type:     'api_platform'
     prefix:   '/api' # Optional
-    
-homepage:
-    path: '@AppBundle/Controller/'    
-    defaults:
-        _controller: 'MainController'
-       
-    
+
+root:
+    path:      '/'
+    defaults: { _controller: AppBundle:Home:index }
